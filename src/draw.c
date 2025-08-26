@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:50:26 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/08/26 16:56:20 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/08/26 17:01:38 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,6 @@ void	draw_pixel(t_img_data *data, int x, int y, int color)
 		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
-}
-
-int	ft_abs(int value)
-{
-	if (value < 0)
-		return (value * -1);
-	return (value);
 }
 
 static void	init_bresenham(t_bresenham *bresenham,
