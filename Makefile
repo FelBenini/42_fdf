@@ -31,8 +31,9 @@ LIBFT_HDR = ./libft/libft.h
 SRCS = ./src/main.c \
 	   ./src/draw.c \
 	   ./src/point.c \
+	   ./src/parse.c \
 	   ./src/mlx.c \
-	   ./src/parse.c
+	   ./src/projection.c
 
 OBJS = $(SRCS:.c=.o)
 

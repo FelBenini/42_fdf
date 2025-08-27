@@ -60,6 +60,7 @@ void		draw_line(t_img_data *data, t_2dpoint *from, t_2dpoint *to);
 
 t_2dpoint	*new_2dpoint(int x, int y);
 t_3dpoint	*new_3dpoint(int x, int y, int z);
+t_2dpoint	*isometric_projection(t_3dpoint *point3d, double scale);
 
 int			close_window(void *params);
 

@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:48:48 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/08/27 15:59:53 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/08/27 17:51:53 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		return (ft_printf("Please, pass a map as an input"), 1);
 	matrix_3d = parse_map(argv[1]);
+	print_matrix(matrix_3d);
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, img.width, img.height, "HELLO WORLD");
 	img.img = mlx_new_image(mlx.mlx, img.width, img.height);
