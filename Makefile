@@ -6,7 +6,7 @@
 #    By: fbenini- <your@mail.com>                   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/25 14:39:13 by fbenini-          #+#    #+#              #
-#    Updated: 2025/08/27 12:52:31 by fbenini-         ###   ########.fr        #
+#    Updated: 2025/08/27 15:03:00 by fbenini-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ LIBFT_HDR = ./libft/libft.h
 SRCS = ./src/main.c \
 	   ./src/draw.c \
 	   ./src/point.c \
-	   ./src/mlx.c
+	   ./src/mlx.c \
+	   ./src/parse.c
 
 OBJS = $(SRCS:.c=.o)
 
