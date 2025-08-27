@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:51:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/08/26 16:54:37 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/08/27 12:52:07 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,7 @@ void		draw_pixel(t_img_data *data, int x, int y, int color);
 void		draw_line(t_img_data *data, t_2dpoint *from, t_2dpoint *to);
 
 t_2dpoint	*new_2dpoint(int x, int y);
+
+int			close_window(void *params);
 
 #endif
