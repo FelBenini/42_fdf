@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:50:26 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/08/26 17:01:38 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/08/28 13:40:39 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,28 @@ void	draw_pixel(t_img_data *data, int x, int y, int color)
 static void	init_bresenham(t_bresenham *bresenham,
 						t_2dpoint *from, t_2dpoint *to)
 {
+	int	temp;
+
 	bresenham->delta_x = ft_abs(to->x - from->x);
 	bresenham->delta_y = ft_abs(to->y - from->y);
-	bresenham->step_x = 1;
-	bresenham->step_y = 1;
-	if (from->x >= to->x)
-		bresenham->step_x = -1;
-	if (from->y >= to->y)
-		bresenham->step_y = -1;
-	bresenham->slope = bresenham->delta_x - bresenham->delta_y;
+	bresenham->step_x = -1;
+	bresenham->step_y = -1;
+	bresenham->swapped = 0;
+	if (from->x < to->x)
+		bresenham->step_x = 1;
+	if (from->y < to->y)
+		bresenham->step_y = 1;
+	if (bresenham->delta_y > bresenham->delta_x)
+	{
+		temp = bresenham->delta_x;
+		bresenham->delta_x = bresenham->delta_y;
+		bresenham->delta_y = temp;
+		bresenham->swapped = 1;
+	}
+	bresenham->error = bresenham->delta_x / 2;
 }
 
-void	draw_line(t_img_data *data, t_2dpoint *from, t_2dpoint *to)
+void	draw_line(t_img_data *data, t_2dpoint *from, t_2dpoint *to, int start)
 {
 	t_bresenham	b;
 	int			x;
@@ -45,20 +55,22 @@ void	draw_line(t_img_data *data, t_2dpoint *from, t_2dpoint *to)
 	init_bresenham(&b, from, to);
 	x = from->x;
 	y = from->y;
-	while (1)
+	while (start <= b.delta_x)
 	{
-		draw_pixel(data, x, y, 0x00FF0000);
-		if (x == to->x && y == to->y)
-			break ;
-		if (2 * b.slope > b.delta_y * -1)
+		draw_pixel(data, x, y, 0xFFFFFFF);
+		b.error -= b.delta_y;
+		if (b.error < 0)
 		{
-			b.slope -= b.delta_y;
-			x += b.step_x;
+			b.error += b.delta_x;
+			if (b.swapped)
+				x += b.step_x;
+			else
+				y += b.step_y;
 		}
-		if (2 * b.slope < b.delta_x)
-		{
-			b.slope += b.delta_x;
+		if (b.swapped)
 			y += b.step_y;
-		}
+		else
+			x += b.step_x;
+		start++;
 	}
 }

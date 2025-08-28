@@ -34,7 +34,7 @@ static t_3dpoint	***convert_list_to_matrix(t_list *head,
 	char			**content;
 
 	i = 0;
-	res = (t_3dpoint ***)ft_calloc(lst_size, sizeof(t_3dpoint **));
+	res = (t_3dpoint ***)ft_calloc(lst_size + 1, sizeof(t_3dpoint **));
 	if (!res)
 		return (NULL);
 	while (head->next)

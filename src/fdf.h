@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:51:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/08/27 15:19:32 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/08/28 13:44:33 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,13 @@ typedef struct s_bresenham
 	int	delta_y;
 	int	step_x;
 	int	step_y;
-	int	slope;
+	int	error;
+	int	swapped;
 }	t_bresenham;
 
 void		draw_pixel(t_img_data *data, int x, int y, int color);
-void		draw_line(t_img_data *data, t_2dpoint *from, t_2dpoint *to);
+void		draw_line(t_img_data *data, t_2dpoint *from,
+				t_2dpoint *to, int start);
 
 t_2dpoint	*new_2dpoint(int x, int y);
 t_3dpoint	*new_3dpoint(int x, int y, int z);

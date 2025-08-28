@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:00:59 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/08/27 18:04:44 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/08/28 13:43:38 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,17 @@
 t_2dpoint	*isometric_projection(t_3dpoint *point3d, double scale)
 {
 	t_2dpoint	*res;
-	
+	double		projected_x;
+	double		projected_y;
+
 	res = (t_2dpoint *)malloc(sizeof(t_2dpoint));
-	res->x = (int)((point3d->x - point3d->z) * scale);
-	res->y = (int)((point3d->x + point3d->z - 2 * point3d->y) * 0.5 * scale);
+	if (res == NULL)
+		return (NULL);
+	projected_x = (point3d->x - point3d->y) * 0.866;
+	projected_y = (point3d->x + 2 * point3d->y + -point3d->z) * 0.5;
+	res->x = (int)(projected_x * scale);
+	res->y = (int)(projected_y * scale);
+	res->x += 300;
+	res->y += 200;
 	return (res);
 }
