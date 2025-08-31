@@ -33,7 +33,8 @@ SRCS = ./src/main.c \
 	   ./src/point.c \
 	   ./src/parse.c \
 	   ./src/mlx.c \
-	   ./src/projection.c
+	   ./src/projection.c \
+	   ./src/initializers.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -20,3 +20,13 @@ int	close_window(void *params)
 	mlx_loop_end(mlx->mlx);
 	return (0);
 }
+
+int	handle_keymaps(int keycode, void *params)
+{
+	t_mlx_args	*mlx;
+
+	mlx = (t_mlx_args *)params;
+	if (keycode == 65307)
+		mlx_loop_end(mlx->mlx);
+	return (0);
+}

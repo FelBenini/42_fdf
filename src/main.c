@@ -68,25 +68,23 @@ void	clear_matrix(t_3dpoint ***matrix)
 
 int	main(int argc, char *argv[])
 {
-	t_mlx_args	mlx;
-	t_img_data	img;
 	t_3dpoint	***matrix_3d;
+	t_environment	*env;
 
-	img.width = 760;
-	img.height = 680;
 	if (argc != 2)
 		return (ft_printf("Please, pass a map as an input"), 1);
+	env = init_environment();
 	matrix_3d = parse_map(argv[1]);
-	mlx.mlx = mlx_init();
-	mlx.win = mlx_new_window(mlx.mlx, img.width, img.height, "HELLO WORLD");
-	img.img = mlx_new_image(mlx.mlx, img.width, img.height);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-			&img.line_length, &img.endian);
-	print_matrix(matrix_3d, &img);
-	mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
-	mlx_hook(mlx.win, 17, 0, close_window, &mlx);
-	mlx_loop(mlx.mlx);
-	mlx_destroy_window(mlx.mlx, mlx.win);
+	print_matrix(matrix_3d, &env->img);
+	mlx_put_image_to_window(env->mlx.mlx, env->mlx.win, env->img.img, 0, 0);
+	mlx_hook(env->mlx.win, 17, 0, close_window, &env->mlx);
+	mlx_key_hook(env->mlx.win, handle_keymaps, &env->mlx);
+	mlx_loop(env->mlx.mlx);
+	mlx_destroy_image(env->mlx.mlx, env->img.img);
+	mlx_destroy_window(env->mlx.mlx, env->mlx.win);
+	mlx_destroy_display(env->mlx.mlx);
+	free(env->mlx.mlx);
+	free(env);
 	clear_matrix(matrix_3d);
 	return (0);
 }

@@ -56,16 +56,25 @@ typedef struct s_bresenham
 	int	swapped;
 }	t_bresenham;
 
-void		draw_pixel(t_img_data *data, int x, int y, int color);
-void		draw_line(t_img_data *data, t_2dpoint *from,
-				t_2dpoint *to, int start);
+typedef struct s_environment
+{
+	t_img_data	img;
+	t_mlx_args	mlx;
+}	t_environment;
 
-t_2dpoint	*new_2dpoint(int x, int y);
-t_3dpoint	*new_3dpoint(int x, int y, int z);
-t_2dpoint	*isometric_projection(t_3dpoint *point3d, double scale);
+void			draw_pixel(t_img_data *data, int x, int y, int color);
+void			draw_line(t_img_data *data, t_2dpoint *from,
+					t_2dpoint *to, int start);
 
-int			close_window(void *params);
+t_2dpoint		*new_2dpoint(int x, int y);
+t_3dpoint		*new_3dpoint(int x, int y, int z);
+t_2dpoint		*isometric_projection(t_3dpoint *point3d, double scale);
 
-t_3dpoint	***parse_map(char *filename);
+int				close_window(void *params);
+int				handle_keymaps(int keycode, void *params);
+
+t_3dpoint		***parse_map(char *filename);
+
+t_environment	*init_environment(void);
 
 #endif
