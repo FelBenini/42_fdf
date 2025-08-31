@@ -6,7 +6,7 @@
 #    By: fbenini- <your@mail.com>                   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/25 14:39:13 by fbenini-          #+#    #+#              #
-#    Updated: 2025/08/27 15:03:00 by fbenini-         ###   ########.fr        #
+#    Updated: 2025/08/31 15:35:11 by fbenini-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ SRCS = ./src/main.c \
 	   ./src/parse.c \
 	   ./src/mlx.c \
 	   ./src/projection.c \
-	   ./src/initializers.c
+	   ./src/initializers.c \
+	   ./src/cleaners.c
 
 OBJS = $(SRCS:.c=.o)
 

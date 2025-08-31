@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:51:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/08/28 13:44:33 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/08/31 15:35:01 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ typedef struct s_environment
 {
 	t_img_data	img;
 	t_mlx_args	mlx;
+	t_3dpoint	***map;
+	int			highest_x;
+	int			highest_y;
+	int			highest_z;
+	double		scale;
 }	t_environment;
 
 void			draw_pixel(t_img_data *data, int x, int y, int color);
@@ -68,13 +73,15 @@ void			draw_line(t_img_data *data, t_2dpoint *from,
 
 t_2dpoint		*new_2dpoint(int x, int y);
 t_3dpoint		*new_3dpoint(int x, int y, int z);
-t_2dpoint		*isometric_projection(t_3dpoint *point3d, double scale);
+t_2dpoint		*isometric_projection(t_3dpoint *point3d);
 
 int				close_window(void *params);
 int				handle_keymaps(int keycode, void *params);
 
 t_3dpoint		***parse_map(char *filename);
 
-t_environment	*init_environment(void);
+t_environment	**get_env(void);
+t_environment	*init_environment(char *filename);
+void			clean_env(t_environment *env);
 
 #endif
