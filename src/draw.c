@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:50:26 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/01 18:06:30 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:25:28 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,34 +45,33 @@ static void	init_bresenham(t_bresenham *bresenham,
 	}
 	bresenham->error = bresenham->delta_x / 2;
 	bresenham->total_steps = ft_gethigher(bresenham->delta_x,
-										bresenham->delta_y);
+			bresenham->delta_y);
 }
 
 void	draw_line(t_img_data *data, t_2dpoint *from, t_2dpoint *to, int start)
 {
 	t_bresenham	b;
-	int			x;
-	int			y;
 
 	init_bresenham(&b, from, to);
-	x = from->x;
-	y = from->y;
+	b.x = from->x;
+	b.y = from->y;
 	while (start <= b.delta_x)
 	{
-		draw_pixel(data, x, y, get_color(from->height, to->height, start, b.total_steps));
+		draw_pixel(data, b.x, b.y, get_color(from->height, to->height,
+				start, b.total_steps));
 		b.error -= b.delta_y;
 		if (b.error < 0)
 		{
 			b.error += b.delta_x;
 			if (b.swapped)
-				x += b.step_x;
+				b.x += b.step_x;
 			else
-				y += b.step_y;
+				b.y += b.step_y;
 		}
 		if (b.swapped)
-			y += b.step_y;
+			b.y += b.step_y;
 		else
-			x += b.step_x;
+			b.x += b.step_x;
 		start++;
 	}
 }

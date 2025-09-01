@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:51:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/01 18:30:46 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:25:40 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_2dpoint
 
 typedef struct s_bresenham
 {
+	int	x;
+	int	y;
 	int	delta_x;
 	int	delta_y;
 	int	step_x;
@@ -60,14 +62,15 @@ typedef struct s_bresenham
 
 typedef struct s_environment
 {
-	t_img_data	img;
-	t_mlx_args	mlx;
-	t_3dpoint	***map;
-	int			highest_x;
-	int			highest_y;
-	int			highest_z;
-	int			lowest_z;
-	double		scale;
+	t_img_data		img;
+	t_mlx_args		mlx;
+	t_3dpoint		***map;
+	int				highest_x;
+	int				highest_y;
+	int				highest_z;
+	int				lowest_z;
+	double			scale;
+	unsigned int	colors[4];
 }	t_environment;
 
 typedef struct t_rgba
@@ -95,6 +98,7 @@ t_environment	**get_env(void);
 t_environment	*init_environment(char *filename);
 void			clean_env(t_environment *env);
 
-unsigned int	get_color(int from_z, int to_z, int current_step, int total_steps);
+unsigned int	get_color(int from_z, int to_z,
+					int current_step, int total_steps);
 
 #endif
