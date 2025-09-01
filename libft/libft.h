@@ -6,7 +6,7 @@
 /*   By: fbenini- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 18:11:25 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/08/26 17:00:14 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/01 16:22:56 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ int		ft_intlen(unsigned int n);
 char	*ft_utoa(unsigned int n);
 char	*get_next_line(int fd);
 int		ft_abs(int value);
+int		ft_gethigher(int a, int b);
 
 #endif

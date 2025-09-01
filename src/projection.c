@@ -27,6 +27,7 @@ t_2dpoint	*isometric_projection(t_3dpoint *point3d)
 	projected_y = (point3d->x + 2 * point3d->y + -point3d->z) * 0.5;
 	res->x = (int)(projected_x * env->scale);
 	res->y = (int)(projected_y * env->scale);
+	res->height = point3d->z;
 	res->x += 840;
 	res->y += 240;
 	return (res);

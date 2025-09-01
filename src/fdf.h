@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:51:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/08/31 15:35:01 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/01 18:30:46 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_2dpoint
 {
 	int	x;
 	int	y;
+	int	height;
 }	t_2dpoint;
 
 typedef struct s_bresenham
@@ -54,6 +55,7 @@ typedef struct s_bresenham
 	int	step_y;
 	int	error;
 	int	swapped;
+	int	total_steps;
 }	t_bresenham;
 
 typedef struct s_environment
@@ -64,14 +66,23 @@ typedef struct s_environment
 	int			highest_x;
 	int			highest_y;
 	int			highest_z;
+	int			lowest_z;
 	double		scale;
 }	t_environment;
+
+typedef struct t_rgba
+{
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
+	unsigned int	a;
+}	t_rgba;
 
 void			draw_pixel(t_img_data *data, int x, int y, int color);
 void			draw_line(t_img_data *data, t_2dpoint *from,
 					t_2dpoint *to, int start);
 
-t_2dpoint		*new_2dpoint(int x, int y);
+t_2dpoint		*new_2dpoint(int x, int y, int z);
 t_3dpoint		*new_3dpoint(int x, int y, int z);
 t_2dpoint		*isometric_projection(t_3dpoint *point3d);
 
@@ -83,5 +94,7 @@ t_3dpoint		***parse_map(char *filename);
 t_environment	**get_env(void);
 t_environment	*init_environment(char *filename);
 void			clean_env(t_environment *env);
+
+unsigned int	get_color(int from_z, int to_z, int current_step, int total_steps);
 
 #endif

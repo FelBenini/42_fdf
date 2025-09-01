@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 13:33:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/08/28 13:33:56 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/01 17:56:41 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ static void	get_highest_point(t_3dpoint ***map, t_environment **environment)
 
 	i = 0;
 	env = *environment;
-	env->highest_x = 0;
-	env->highest_y = 0;
-	env->highest_z = 0;
 	while (map[i])
 	{
 		j = 0;
@@ -34,6 +31,8 @@ static void	get_highest_point(t_3dpoint ***map, t_environment **environment)
 				env->highest_y = map[i][j]->y;
 			if (map[i][j]->z > env->highest_z)
 				env->highest_z = map[i][j]->z;
+			if (map[i][j]-> z < env->lowest_z)
+				env->lowest_z = map[i][j]->z;
 			j++;
 		}
 		i++;
@@ -64,6 +63,10 @@ t_environment	**get_env(void)
 	if (env)
 		return (&env);
 	env = malloc(sizeof(t_environment));
+	env->highest_x = 0;
+	env->highest_y = 0;
+	env->highest_z = 0;
+	env->lowest_z = 0;
 	if (!env)
 		return (NULL);
 	return (&env);
@@ -76,6 +79,7 @@ t_environment	*init_environment(char *filename)
 	env = *get_env();
 	if (!env)
 		return (NULL);
+	env->map = parse_map(filename);
 	env->img.width = 1920;
 	env->img.height = 1080;
 	env->mlx.mlx = mlx_init();
@@ -84,7 +88,6 @@ t_environment	*init_environment(char *filename)
 	env->img.img = mlx_new_image(env->mlx.mlx, env->img.width, env->img.height);
 	env->img.addr = mlx_get_data_addr(env->img.img, &env->img.bits_per_pixel,
 			&env->img.line_length, &env->img.endian);
-	env->map = parse_map(filename);
 	get_highest_point(env->map, &env);
 	env->scale = get_base_scale(&env);
 	return (env);
