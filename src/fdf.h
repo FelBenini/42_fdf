@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:51:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/01 19:25:40 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/02 20:15:02 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,24 @@ typedef struct s_environment
 	int				highest_z;
 	int				lowest_z;
 	double			scale;
-	unsigned int	colors[4];
+	unsigned int	colors[3];
 }	t_environment;
 
-typedef struct t_rgba
+typedef struct s_rgba
 {
 	unsigned int	r;
 	unsigned int	g;
 	unsigned int	b;
 	unsigned int	a;
 }	t_rgba;
+
+typedef struct s_gradient_args
+{
+	double			normalized_z_t;
+	double			segment_t;
+	t_rgba			start_rgb;
+	t_rgba			end_rgb;
+}	t_gradient_args;
 
 void			draw_pixel(t_img_data *data, int x, int y, int color);
 void			draw_line(t_img_data *data, t_2dpoint *from,
