@@ -66,10 +66,14 @@ typedef struct s_environment
 	t_mlx_args		mlx;
 	t_3dpoint		***map;
 	int				highest_x;
+	int				lowest_x;
 	int				highest_y;
+	int				lowest_y;
 	int				highest_z;
 	int				lowest_z;
 	double			scale;
+	int				offset_x;
+	int				offset_y;
 	unsigned int	colors[3];
 }	t_environment;
 
@@ -105,6 +109,7 @@ t_3dpoint		***parse_map(char *filename);
 t_environment	**get_env(void);
 t_environment	*init_environment(char *filename);
 void			clean_env(t_environment *env);
+void			get_highest_projections(t_3dpoint *point_3d);
 
 unsigned int	get_color(int from_z, int to_z,
 					int current_step, int total_steps);

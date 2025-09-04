@@ -31,5 +31,6 @@ t_3dpoint	*new_3dpoint(int x, int y, int z)
 	res->x = x;
 	res->y = y;
 	res->z = z;
+	get_highest_projections(res);
 	return (res);
 }

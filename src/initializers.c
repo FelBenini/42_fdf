@@ -25,10 +25,6 @@ static void	get_highest_point(t_3dpoint ***map, t_environment **environment)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j]->x > env->highest_x)
-				env->highest_x = map[i][j]->x;
-			if (map[i][j]->y > env->highest_y)
-				env->highest_y = map[i][j]->y;
 			if (map[i][j]->z > env->highest_z)
 				env->highest_z = map[i][j]->z;
 			if (map[i][j]-> z < env->lowest_z)
@@ -39,21 +35,22 @@ static void	get_highest_point(t_3dpoint ***map, t_environment **environment)
 	}
 }
 
-static double	get_base_scale(t_environment **environment)
+void	get_highest_projections(t_3dpoint *point_3d)
 {
-	double			scale;
-	int				res;
 	t_environment	*env;
+	t_2dpoint		*point_2d;
 
-	scale = 100;
-	env = *environment;
-	res = env->highest_y;
-	if (env->highest_x > res)
-		res = env->highest_x;
-	if (env->highest_z > res)
-		res = env->highest_z;
-	scale /= res * 0.14;
-	return (scale);
+	env = *get_env();
+	point_2d = isometric_projection(point_3d);
+	if (env->highest_x > point_2d->x)
+		env->highest_x = point_2d->x;
+	if (env->lowest_x < point_2d->x)
+		env->lowest_x = point_2d->x;
+	if (env->highest_y > point_2d->y)
+		env->highest_y = point_2d->y;
+	if (env->lowest_y < point_2d->y)
+		env->lowest_y = point_2d->y;
+	free(point_2d);
 }
 
 t_environment	**get_env(void)
@@ -64,12 +61,17 @@ t_environment	**get_env(void)
 		return (&env);
 	env = malloc(sizeof(t_environment));
 	env->highest_x = 0;
+	env->lowest_x = 0;
 	env->highest_y = 0;
+	env->lowest_y = 0;
 	env->highest_z = 0;
 	env->lowest_z = 0;
-	env->colors[0] = 0x5b5b5b;
-	env->colors[1] = 0xFFa3a3;
-	env->colors[2] = 0xd9fbff;
+	env->offset_x = 0;
+	env->offset_y = 0;
+	env->colors[0] = 0xFFFFFF;
+	env->colors[1] = 0xFFFFFF;
+	env->colors[2] = 0xFFFFFF;
+	env->scale = 1.5;
 	if (!env)
 		return (NULL);
 	return (&env);
@@ -92,6 +94,11 @@ t_environment	*init_environment(char *filename)
 	env->img.addr = mlx_get_data_addr(env->img.img, &env->img.bits_per_pixel,
 			&env->img.line_length, &env->img.endian);
 	get_highest_point(env->map, &env);
-	env->scale = get_base_scale(&env);
+	if (env->highest_x - env->lowest_x < env->highest_y - env->lowest_y)
+		env->scale = (1920 * 0.85) / (env->highest_x - env->lowest_x);
+	else
+		env->scale = (1580 * 0.85) / (env->highest_y - env->lowest_y);
+	env->offset_x = (2620 - ((env->highest_x) * env->scale)) / 2;
+	env->offset_y = (1480 - ((env->highest_y) * env->scale)) / 2;
 	return (env);
 }
