@@ -68,9 +68,9 @@ t_environment	**get_env(void)
 	env->lowest_z = 0;
 	env->offset_x = 0;
 	env->offset_y = 0;
-	env->colors[0] = 0xFFFFFF;
-	env->colors[1] = 0xFFFFFF;
-	env->colors[2] = 0xFFFFFF;
+	env->colors[0] = 0x616161;
+	env->colors[1] = 0x888888;
+	env->colors[2] = 16777215;
 	env->scale = 1.5;
 	if (!env)
 		return (NULL);
@@ -95,10 +95,10 @@ t_environment	*init_environment(char *filename)
 			&env->img.line_length, &env->img.endian);
 	get_highest_point(env->map, &env);
 	if (env->highest_x - env->lowest_x < env->highest_y - env->lowest_y)
-		env->scale = (1920 * 0.85) / (env->highest_x - env->lowest_x);
+		env->scale = (1920 * 0.80) / (env->highest_x - env->lowest_x);
 	else
 		env->scale = (1580 * 0.85) / (env->highest_y - env->lowest_y);
 	env->offset_x = (2620 - ((env->highest_x) * env->scale)) / 2;
-	env->offset_y = (1480 - ((env->highest_y) * env->scale)) / 2;
+	env->offset_y = (1490 - ((env->highest_y) * env->scale)) / 2;
 	return (env);
 }

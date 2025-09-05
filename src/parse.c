@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:53:49 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/08/27 17:08:08 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/05 16:30:48 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static t_3dpoint	***convert_list_to_matrix(t_list *head,
 		res[i] = (t_3dpoint **)ft_calloc(j + 1, sizeof(t_3dpoint *));
 		j = 0;
 		while (content[j++])
-			res[i][j - 1] = new_3dpoint(j - 1, i, ft_atoi(content[j - 1]));
+			res[i][j - 1] = new_3dpoint(j - 1, i, ft_atoi(content[j - 1]),
+					ft_strnstr(content[j - 1], ",0x", 30));
 		clear_splitted(content);
 		head = head->next;
 		i++;

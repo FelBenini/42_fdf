@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:48:48 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/08/31 15:35:35 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/05 16:40:37 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	print_matrix(t_3dpoint ***matrix, t_img_data *img_data)
 	int			i;
 	t_2dpoint	*point;
 	t_2dpoint	*next_point;
-	t_2dpoint	*point_below;
 
 	i = 0;
 	while (matrix[i])
@@ -29,9 +28,9 @@ void	print_matrix(t_3dpoint ***matrix, t_img_data *img_data)
 			point = isometric_projection(matrix[i][j]);
 			if (matrix[i][j + 1])
 			{
-				point_below = isometric_projection(matrix[i][j + 1]);
-				draw_line(img_data, point, point_below, 0);
-				free(point_below);
+				next_point = isometric_projection(matrix[i][j + 1]);
+				draw_line(img_data, point, next_point, 0);
+				free(next_point);
 			}
 			if (matrix[i + 1] && matrix[i + 1][j])
 			{

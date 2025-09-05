@@ -57,8 +57,7 @@ void	draw_line(t_img_data *data, t_2dpoint *from, t_2dpoint *to, int start)
 	b.y = from->y;
 	while (start <= b.delta_x)
 	{
-		draw_pixel(data, b.x, b.y, get_color(from->height, to->height,
-				start, b.total_steps));
+		draw_pixel(data, b.x, b.y, from->color);
 		b.error -= b.delta_y;
 		if (b.error < 0)
 		{

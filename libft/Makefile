@@ -6,7 +6,7 @@
 #    By: fbenini- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/17 19:14:42 by fbenini-          #+#    #+#              #
-#    Updated: 2025/09/02 20:09:47 by fbenini-         ###   ########.fr        #
+#    Updated: 2025/09/05 16:20:35 by fbenini-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,8 @@ SRCS =	ft_atoi.c \
 		get_next_line.c \
 		ft_abs.c \
 		ft_gethigher.c \
-		ft_norm.c
+		ft_norm.c \
+		ft_atoi_base.c
 
 HDRS = libft.h
 

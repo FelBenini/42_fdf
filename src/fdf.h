@@ -35,9 +35,10 @@ typedef struct s_img_data
 
 typedef struct s_3dpoint
 {
-	int	x;
-	int	y;
-	int	z;
+	int		x;
+	int		y;
+	int		z;
+	char	*color;
 }	t_3dpoint;
 
 typedef struct s_2dpoint
@@ -45,6 +46,7 @@ typedef struct s_2dpoint
 	int	x;
 	int	y;
 	int	height;
+	int	color;
 }	t_2dpoint;
 
 typedef struct s_bresenham
@@ -98,7 +100,7 @@ void			draw_line(t_img_data *data, t_2dpoint *from,
 					t_2dpoint *to, int start);
 
 t_2dpoint		*new_2dpoint(int x, int y, int z);
-t_3dpoint		*new_3dpoint(int x, int y, int z);
+t_3dpoint		*new_3dpoint(int x, int y, int z, char *color);
 t_2dpoint		*isometric_projection(t_3dpoint *point3d);
 
 int				close_window(void *params);

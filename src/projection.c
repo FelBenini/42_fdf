@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:00:59 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/08/28 13:43:38 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/05 16:32:09 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ t_2dpoint	*isometric_projection(t_3dpoint *point3d)
 	res->x = (int)(projected_x * env->scale);
 	res->y = (int)(projected_y * env->scale);
 	res->height = point3d->z;
+	if (point3d->color)
+		res->color = ft_atoi_base(point3d->color, "0123456789ABCDEF");
+	else
+		res->color = get_color(res->height, res->height, 1, 1);
 	res->x += env->offset_x;
 	res->y += env->offset_y;
 	return (res);

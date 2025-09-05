@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 15:33:23 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/08/31 15:34:40 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/05 16:39:42 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	clear_matrix(t_3dpoint ***matrix)
 		j = 0;
 		while (matrix[i][j])
 		{
+			free(matrix[i][j]->color);
 			free(matrix[i][j]);
 			j++;
 		}
