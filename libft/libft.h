@@ -6,7 +6,7 @@
 /*   By: fbenini- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 18:11:25 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/05 16:20:08 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/06 20:17:30 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ int		ft_abs(int value);
 int		ft_gethigher(int a, int b);
 double	ft_norm(double num);
 int		ft_atoi_base(char *str, char *base);
+char	*ft_strupcase(char *str);
 
 #endif

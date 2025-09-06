@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 13:33:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/02 20:31:53 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/05 18:39:44 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ t_environment	**get_env(void)
 	env->lowest_z = 0;
 	env->offset_x = 0;
 	env->offset_y = 0;
-	env->colors[0] = 0x616161;
-	env->colors[1] = 0x888888;
-	env->colors[2] = 16777215;
+	env->colors[0] = 0x646464;
+	env->colors[1] = 0xFFFFFF;
+	env->colors[2] = 0xFFFFFF;
 	env->scale = 1.5;
 	if (!env)
 		return (NULL);

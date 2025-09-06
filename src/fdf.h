@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:51:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/02 20:15:02 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/06 20:48:58 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,23 +79,22 @@ typedef struct s_environment
 	unsigned int	colors[3];
 }	t_environment;
 
-typedef struct s_rgba
+typedef struct s_rgb
 {
 	unsigned int	r;
 	unsigned int	g;
 	unsigned int	b;
-	unsigned int	a;
-}	t_rgba;
+}	t_rgb;
 
 typedef struct s_gradient_args
 {
 	double			normalized_z_t;
 	double			segment_t;
-	t_rgba			start_rgb;
-	t_rgba			end_rgb;
+	t_rgb			start_rgb;
+	t_rgb			end_rgb;
 }	t_gradient_args;
 
-void			draw_pixel(t_img_data *data, int x, int y, int color);
+void			draw_pixel(t_img_data *data, int x, int y, unsigned int color);
 void			draw_line(t_img_data *data, t_2dpoint *from,
 					t_2dpoint *to, int start);
 
@@ -113,7 +112,10 @@ t_environment	*init_environment(char *filename);
 void			clean_env(t_environment *env);
 void			get_highest_projections(t_3dpoint *point_3d);
 
-unsigned int	get_color(int from_z, int to_z,
-					int current_step, int total_steps);
+unsigned int	get_color(int height);
+t_rgb			create_rgba(unsigned int color);
+unsigned int	interpolate_rgba(t_rgb start_comp, t_rgb end_comp,
+					double t);
+t_rgb			create_rgba(unsigned int color);
 
 #endif
