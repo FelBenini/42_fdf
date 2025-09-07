@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:51:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/07 15:02:47 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/07 15:15:16 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,10 @@ t_3dpoint		***parse_map(char *filename);
 
 t_environment	**get_env(void);
 t_environment	*init_environment(char *filename);
-void			clean_env(t_environment *env);
 void			get_highest_projections(t_3dpoint *point_3d);
+
+void			clean_env(t_environment *env);
+void			clear_splitted(char **splitted);
 
 unsigned int	get_color(int height);
 t_rgb			create_rgba(unsigned int color);

@@ -6,24 +6,11 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:53:49 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/05 16:30:48 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/07 15:14:31 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-static void	clear_splitted(char **splitted)
-{
-	int	i;
-
-	i = 0;
-	while (splitted[i])
-	{
-		free(splitted[i]);
-		i++;
-	}
-	free(splitted);
-}
 
 static t_3dpoint	***convert_list_to_matrix(t_list *head,
 											unsigned int lst_size)
