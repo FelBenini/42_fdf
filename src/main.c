@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:48:48 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/05 16:40:37 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/07 15:03:29 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 		return (ft_printf("Please, pass a map as an input"), 1);
+	if (!validate_input(argv[1]))
+		return (1);
 	env = init_environment(argv[1]);
 	print_matrix(env->map, &env->img);
 	mlx_put_image_to_window(env->mlx.mlx, env->mlx.win, env->img.img, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:51:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/06 20:48:58 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/07 15:02:47 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,7 @@ t_rgb			create_rgba(unsigned int color);
 unsigned int	interpolate_rgba(t_rgb start_comp, t_rgb end_comp,
 					double t);
 t_rgb			create_rgba(unsigned int color);
+
+int				validate_input(char *filename);
 
 #endif
