@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 13:33:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/07 19:17:53 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/07 20:22:02 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ t_environment	**get_env(void)
 t_environment	*init_environment(char *filename)
 {
 	t_environment	*env;
+	char			*title;
 
 	env = *get_env();
 	if (!env)
@@ -88,8 +89,9 @@ t_environment	*init_environment(char *filename)
 	env->img.width = 1920;
 	env->img.height = 1080;
 	env->mlx.mlx = mlx_init();
+	title = ft_strjoin("FDF - ", filename);
 	env->mlx.win = mlx_new_window(env->mlx.mlx, env->img.width,
-			env->img.height, "FDF");
+			env->img.height, title);
 	env->img.img = mlx_new_image(env->mlx.mlx, env->img.width, env->img.height);
 	env->img.addr = mlx_get_data_addr(env->img.img, &env->img.bits_per_pixel,
 			&env->img.line_length, &env->img.endian);
@@ -100,5 +102,6 @@ t_environment	*init_environment(char *filename)
 		env->scale = (1580 * 0.85) / (env->highest_y - env->lowest_y);
 	env->offset_x = (2620 - ((env->highest_x) * env->scale)) / 2;
 	env->offset_y = (1490 - ((env->highest_y) * env->scale)) / 2;
+	free(title);
 	return (env);
 }
