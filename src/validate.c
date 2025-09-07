@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 14:58:13 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/07 17:20:43 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/07 19:14:38 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static int	check_elem(char *elem, int line_num, int column_num)
 	if (after_comma && ft_strncmp(after_comma, ",0x", 3) != 0)
 		returned = 0;
 	if (!returned)
-		ft_printf("❌ Element at line %d, column %d is invalid.\n",
-			line_num, column_num);
+		ft_printf("❌ Element %s at line %d, column %d is invalid.\n",
+			elem, line_num, column_num);
 	return (returned);
 }
 
@@ -49,7 +49,7 @@ static int	check_for_elems(char *line, int line_num)
 
 	splitted = ft_split(line, ' ');
 	i = 0;
-	while (splitted[i])
+	while (splitted[i] && splitted[i][0] != '\n')
 	{
 		if (!check_elem(splitted[i], line_num, i + 1))
 		{
@@ -97,6 +97,7 @@ int	validate_input(char *filename)
 	int	fd;
 
 	fd = open(filename, O_RDWR);
+	ft_printf("💾 Validating map file...\n");
 	if (fd < 0)
 	{
 		ft_printf("❌ File or directory not found.\n");
@@ -104,7 +105,7 @@ int	validate_input(char *filename)
 	}
 	if (!is_valid(fd))
 	{
-		ft_printf("❌ File passed as input is invalid. Try another one\n");
+		ft_printf("❌ File passed as input is invalid, try another one.\n");
 		close(fd);
 		return (0);
 	}

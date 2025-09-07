@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 14:06:17 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/06 20:19:26 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/07 20:18:12 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_2dpoint	*new_2dpoint(int x, int y, int z)
 t_3dpoint	*new_3dpoint(int x, int y, int z, char *color)
 {
 	t_3dpoint	*res;
+	static int	count;
 
 	res = (t_3dpoint *)malloc(sizeof(t_3dpoint));
 	res->x = x;
@@ -40,5 +41,7 @@ t_3dpoint	*new_3dpoint(int x, int y, int z, char *color)
 	else
 		res->color = NULL;
 	get_highest_projections(res);
+	count++;
+	ft_printf("\r⏏️  %d Map points parsed.", count);
 	return (res);
 }
