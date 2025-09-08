@@ -12,9 +12,9 @@
 
 NAME = fdf
 
-CC = gcc
+CC = cc
 
-CFLAGS = -Wextra -Wall -Werror -no-pie
+CFLAGS = -Wextra -Wall -Werror
 
 MINILIB = ./minilibx/libmlx_Linux.a
 
@@ -39,7 +39,20 @@ SRCS = ./src/main.c \
 	   ./src/colors.c \
 	   ./src/validate.c
 
+SRCS_BONUS = ./src_bonus/main_bonus.c \
+	   ./src_bonus/draw_bonus.c \
+	   ./src_bonus/point_bonus.c \
+	   ./src_bonus/parse_bonus.c \
+	   ./src_bonus/mlx_bonus.c \
+	   ./src_bonus/projection_bonus.c \
+	   ./src_bonus/initializers_bonus.c \
+	   ./src_bonus/cleaners_bonus.c \
+	   ./src_bonus/colors_bonus.c \
+	   ./src_bonus/validate_bonus.c
+
 OBJS = $(SRCS:.c=.o)
+
+BONUS_OBJS = $(SRCS_BONUS:.c=.o)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -55,8 +68,11 @@ $(LIBFT):
 
 all: $(NAME)
 
+bonus: $(BONUS_OBJS) $(MINILIB) $(LIBFT)
+	$(CC) $(CFLAGS) $(BONUS_OBJS) -o $(NAME) -L$(MINILIB_DIR) -lmlx_Linux -L$(LIBFT_DIR) -lXext -lX11 -lm -lz -lft
+
 clean:
-	rm -rf $(OBJS)
+	rm -rf $(OBJS) $(BONUS_OBJS)
 	@$(MAKE) clean -C $(LIBFT_DIR)
 	@$(MAKE) clean -C $(MINILIB_DIR)
 
@@ -67,4 +83,6 @@ fclean: clean
 
 re: fclean $(NAME)
 
-.PHONY: all fclean clean re
+re-bonus: fclean bonus
+
+.PHONY: all fclean clean re bonus re-bonus
