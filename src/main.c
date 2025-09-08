@@ -12,12 +12,32 @@
 
 #include "fdf.h"
 
+static void	create_lines(t_3dpoint ***matrix, t_img_data *img_data,
+						int i, int j)
+{
+	t_2dpoint	*point;
+	t_2dpoint	*next_point;
+
+	point = isometric_projection(matrix[i][j]);
+	if (matrix[i][j + 1])
+	{
+		next_point = isometric_projection(matrix[i][j + 1]);
+		draw_line(img_data, point, next_point, 0);
+		free(next_point);
+	}
+	if (matrix[i + 1] && matrix[i + 1][j])
+	{
+		next_point = isometric_projection(matrix[i + 1][j]);
+		draw_line(img_data, point, next_point, 0);
+		free(next_point);
+	}
+	free(point);
+}
+
 void	print_matrix(t_3dpoint ***matrix, t_img_data *img_data)
 {
 	int			j;
 	int			i;
-	t_2dpoint	*point;
-	t_2dpoint	*next_point;
 
 	i = 0;
 	while (matrix[i])
@@ -25,20 +45,7 @@ void	print_matrix(t_3dpoint ***matrix, t_img_data *img_data)
 		j = 0;
 		while (matrix[i][j])
 		{
-			point = isometric_projection(matrix[i][j]);
-			if (matrix[i][j + 1])
-			{
-				next_point = isometric_projection(matrix[i][j + 1]);
-				draw_line(img_data, point, next_point, 0);
-				free(next_point);
-			}
-			if (matrix[i + 1] && matrix[i + 1][j])
-			{
-				next_point = isometric_projection(matrix[i + 1][j]);
-				draw_line(img_data, point, next_point, 0);
-				free(next_point);
-			}
-			free(point);
+			create_lines(matrix, img_data, i, j);
 			j++;
 		}
 		i++;

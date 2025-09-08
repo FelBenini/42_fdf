@@ -18,6 +18,7 @@ int	close_window(void *params)
 
 	mlx = (t_mlx_args *)params;
 	mlx_loop_end(mlx->mlx);
+	ft_printf("\n👋 Leaving now, bye!\n");
 	return (0);
 }
 
@@ -27,6 +28,9 @@ int	handle_keymaps(int keycode, void *params)
 
 	mlx = (t_mlx_args *)params;
 	if (keycode == 65307)
+	{
 		mlx_loop_end(mlx->mlx);
+		ft_printf("\n👋 Leaving now, bye!\n");
+	}
 	return (0);
 }

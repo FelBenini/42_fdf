@@ -37,8 +37,8 @@ static int	check_elem(char *elem, int line_num, int column_num)
 	if (after_comma && ft_strncmp(after_comma, ",0x", 3) != 0)
 		returned = 0;
 	if (!returned)
-		ft_printf("❌ Element %s at line %d, column %d is invalid.\n",
-			elem, line_num, column_num);
+		ft_printf("❌ Element at line %d, column %d is invalid.\n",
+			line_num, column_num);
 	return (returned);
 }
 
