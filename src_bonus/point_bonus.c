@@ -45,3 +45,22 @@ t_3dpoint	*new_3dpoint(int x, int y, int z, char *color)
 	ft_printf("\r⏏️  %d Map points parsed.", count);
 	return (res);
 }
+
+void	normalize_map(t_environment *env)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (env->map[y])
+	{
+		x = 0;
+		while (env->map[y][x])
+		{
+			env->map[y][x]->y -= env->height / 2;
+			env->map[y][x]->x -= env->width / 2;
+			x++;
+		}
+		y++;
+	}
+}

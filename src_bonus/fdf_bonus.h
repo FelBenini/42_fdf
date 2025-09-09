@@ -67,6 +67,8 @@ typedef struct s_environment
 	t_img_data		img;
 	t_mlx_args		mlx;
 	t_3dpoint		***map;
+	int				width;
+	int				height;
 	int				highest_x;
 	int				lowest_x;
 	int				highest_y;
@@ -95,15 +97,18 @@ typedef struct s_gradient_args
 }	t_gradient_args;
 
 void			draw_pixel(t_img_data *data, int x, int y, unsigned int color);
-void			draw_line(t_img_data *data, t_2dpoint *from,
-					t_2dpoint *to, int start);
+void			draw_line(t_img_data *data, t_2dpoint from,
+					t_2dpoint to, int start);
 
 t_2dpoint		*new_2dpoint(int x, int y, int z);
 t_3dpoint		*new_3dpoint(int x, int y, int z, char *color);
-t_2dpoint		*isometric_projection(t_3dpoint *point3d);
+t_2dpoint		isometric_projection(t_3dpoint *point3d);
+void			normalize_map(t_environment *env);
 
 int				close_window(void *params);
 int				handle_keymaps(int keycode, void *params);
+int				handle_mouse(int keycode, void *params);
+int				mouse_move(int x, int y, void *param);
 
 t_3dpoint		***parse_map(char *filename);
 
@@ -119,7 +124,10 @@ t_rgb			create_rgba(unsigned int color);
 unsigned int	interpolate_rgba(t_rgb start_comp, t_rgb end_comp,
 					double t);
 t_rgb			create_rgba(unsigned int color);
+void			set_background(t_img_data *img);
 
 int				validate_input(char *filename);
+
+void			print_matrix(t_environment *env);
 
 #endif

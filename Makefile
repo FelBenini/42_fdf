@@ -14,7 +14,7 @@ NAME = fdf
 
 CC = cc
 
-CFLAGS = -Wextra -Wall -Werror
+CFLAGS = -O3 -Wextra -Wall -Werror
 
 MINILIB = ./minilibx/libmlx_Linux.a
 
@@ -28,6 +28,8 @@ LIBFT_DIR = ./libft
 
 LIBFT_HDR = ./libft/libft.h
 
+HDR = ./src/fdf.h
+
 SRCS = ./src/main.c \
 	   ./src/draw.c \
 	   ./src/point.c \
@@ -38,6 +40,8 @@ SRCS = ./src/main.c \
 	   ./src/cleaners.c \
 	   ./src/colors.c \
 	   ./src/validate.c
+
+HDR_BONUS = ./src_bonus/fdf_bonus.h
 
 SRCS_BONUS = ./src_bonus/main_bonus.c \
 	   ./src_bonus/draw_bonus.c \
@@ -54,7 +58,10 @@ OBJS = $(SRCS:.c=.o)
 
 BONUS_OBJS = $(SRCS_BONUS:.c=.o)
 
-%.o: %.c
+$(OBJS): %.o: %.c $(HDR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJS_BONUS): %.o: %.c $(HDR_BONUS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS) $(MINILIB) $(LIBFT)

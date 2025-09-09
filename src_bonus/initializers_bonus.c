@@ -29,6 +29,8 @@ static void	get_highest_point(t_3dpoint ***map, t_environment **environment)
 				env->highest_z = map[i][j]->z;
 			if (map[i][j]-> z < env->lowest_z)
 				env->lowest_z = map[i][j]->z;
+			env->height = i;
+			env->width = j;
 			j++;
 		}
 		i++;
@@ -38,19 +40,18 @@ static void	get_highest_point(t_3dpoint ***map, t_environment **environment)
 void	get_highest_projections(t_3dpoint *point_3d)
 {
 	t_environment	*env;
-	t_2dpoint		*point_2d;
+	t_2dpoint		point_2d;
 
 	env = *get_env();
 	point_2d = isometric_projection(point_3d);
-	if (env->highest_x > point_2d->x)
-		env->highest_x = point_2d->x;
-	if (env->lowest_x < point_2d->x)
-		env->lowest_x = point_2d->x;
-	if (env->highest_y > point_2d->y)
-		env->highest_y = point_2d->y;
-	if (env->lowest_y < point_2d->y)
-		env->lowest_y = point_2d->y;
-	free(point_2d);
+	if (env->highest_x > point_2d.x)
+		env->highest_x = point_2d.x;
+	if (env->lowest_x < point_2d.x)
+		env->lowest_x = point_2d.x;
+	if (env->highest_y > point_2d.y)
+		env->highest_y = point_2d.y;
+	if (env->lowest_y < point_2d.y)
+		env->lowest_y = point_2d.y;
 }
 
 t_environment	**get_env(void)
@@ -71,6 +72,8 @@ t_environment	**get_env(void)
 	env->colors[0] = 0x646464;
 	env->colors[1] = 0xD4D4D4;
 	env->colors[2] = 0xFFFFFF;
+	env->width = 0;
+	env->height = 0;
 	env->scale = 1.5;
 	if (!env)
 		return (NULL);
@@ -83,8 +86,6 @@ t_environment	*init_environment(char *filename)
 	char			*title;
 
 	env = *get_env();
-	if (!env)
-		return (NULL);
 	env->map = parse_map(filename);
 	env->img.width = 1920;
 	env->img.height = 1080;
@@ -96,12 +97,13 @@ t_environment	*init_environment(char *filename)
 	env->img.addr = mlx_get_data_addr(env->img.img, &env->img.bits_per_pixel,
 			&env->img.line_length, &env->img.endian);
 	get_highest_point(env->map, &env);
+	normalize_map(env);
 	if (env->highest_x - env->lowest_x < env->highest_y - env->lowest_y)
 		env->scale = (1920 * 0.80) / (env->highest_x - env->lowest_x);
 	else
 		env->scale = (1580 * 0.85) / (env->highest_y - env->lowest_y);
-	env->offset_x = (2620 - ((env->highest_x) * env->scale)) / 2;
-	env->offset_y = (1490 - ((env->highest_y) * env->scale)) / 2;
+	env->offset_x = (1920 - env->width) / 2;
+	env->offset_y = (1080 - env->height) / 2;
 	free(title);
 	return (env);
 }

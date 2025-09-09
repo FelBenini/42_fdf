@@ -23,18 +23,18 @@ void	draw_pixel(t_img_data *data, int x, int y, unsigned int color)
 }
 
 static void	init_bresenham(t_bresenham *bresenham,
-						t_2dpoint *from, t_2dpoint *to)
+						t_2dpoint from, t_2dpoint to)
 {
 	int	temp;
 
-	bresenham->delta_x = ft_abs(to->x - from->x);
-	bresenham->delta_y = ft_abs(to->y - from->y);
+	bresenham->delta_x = ft_abs(to.x - from.x);
+	bresenham->delta_y = ft_abs(to.y - from.y);
 	bresenham->step_x = -1;
 	bresenham->step_y = -1;
 	bresenham->swapped = 0;
-	if (from->x < to->x)
+	if (from.x < to.x)
 		bresenham->step_x = 1;
-	if (from->y < to->y)
+	if (from.y < to.y)
 		bresenham->step_y = 1;
 	if (bresenham->delta_y > bresenham->delta_x)
 	{
@@ -44,8 +44,8 @@ static void	init_bresenham(t_bresenham *bresenham,
 		bresenham->swapped = 1;
 	}
 	bresenham->error = bresenham->delta_x / 2;
-	bresenham->x = from->x;
-	bresenham->y = from->y;
+	bresenham->x = from.x;
+	bresenham->y = from.y;
 	bresenham->total_steps = ft_gethigher(bresenham->delta_x,
 			bresenham->delta_y);
 }
@@ -70,7 +70,7 @@ static int	interpolate_color(int color1, int color2, double t)
 	return ((r << 16) | (g << 8) | b);
 }
 
-void	draw_line(t_img_data *data, t_2dpoint *from, t_2dpoint *to, int start)
+void	draw_line(t_img_data *data, t_2dpoint from, t_2dpoint to, int start)
 {
 	t_bresenham	b;
 	double		t;
@@ -80,7 +80,7 @@ void	draw_line(t_img_data *data, t_2dpoint *from, t_2dpoint *to, int start)
 	{
 		t = (double)start / b.total_steps;
 		draw_pixel(data, b.x, b.y,
-			interpolate_color(from->color, to->color, t));
+			interpolate_color(from.color, to.color, t));
 		b.error -= b.delta_y;
 		if (b.error < 0)
 		{

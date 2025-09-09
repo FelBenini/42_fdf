@@ -57,3 +57,21 @@ unsigned int	get_color(int height)
 	g.normalized_z_t = ft_norm(g.normalized_z_t);
 	return (interpolate_rgba(g.start_rgb, g.end_rgb, g.normalized_z_t));
 }
+
+void	set_background(t_img_data *img)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y <= img->height)
+	{
+		x = 0;
+		while (x <= img->width)
+		{
+			draw_pixel(img, x, y, 0x000000);
+			x++;
+		}
+		y++;
+	}
+}
