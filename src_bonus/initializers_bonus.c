@@ -80,6 +80,13 @@ t_environment	**get_env(void)
 	return (&env);
 }
 
+void	init_camera(t_environment *env)
+{
+	env->camera.x_rotation = 0.0;
+	env->camera.y_rotation = 99.0;
+	env->camera.z_rotation = 0.0;
+}
+
 t_environment	*init_environment(char *filename)
 {
 	t_environment	*env;
@@ -101,9 +108,9 @@ t_environment	*init_environment(char *filename)
 	if (env->highest_x - env->lowest_x < env->highest_y - env->lowest_y)
 		env->scale = (1920 * 0.80) / (env->highest_x - env->lowest_x);
 	else
-		env->scale = (1580 * 0.85) / (env->highest_y - env->lowest_y);
-	env->offset_x = (1920 - env->width) / 2;
-	env->offset_y = (1080 - env->height) / 2;
+		env->scale = (1680 * 0.80) / (env->highest_y - env->lowest_y);
+	env->offset_x = (1790 - ((env->highest_x - env->lowest_x) * env->scale) / 2);
+	env->offset_y = (2190 - ((env->highest_y) * env->scale)) / 2;
 	free(title);
 	return (env);
 }

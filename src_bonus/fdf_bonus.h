@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include "../minilibx/mlx.h"
+# include <math.h>
 
 typedef struct s_mlx_args
 {
@@ -62,10 +63,18 @@ typedef struct s_bresenham
 	int	total_steps;
 }	t_bresenham;
 
+typedef struct s_camera
+{
+	double	x_rotation;
+	double	y_rotation;
+	double	z_rotation;
+}	t_camera;
+
 typedef struct s_environment
 {
 	t_img_data		img;
 	t_mlx_args		mlx;
+	t_camera		camera;
 	t_3dpoint		***map;
 	int				width;
 	int				height;
