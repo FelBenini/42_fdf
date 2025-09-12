@@ -52,7 +52,8 @@ SRCS_BONUS = ./src_bonus/main_bonus.c \
 	   ./src_bonus/initializers_bonus.c \
 	   ./src_bonus/cleaners_bonus.c \
 	   ./src_bonus/colors_bonus.c \
-	   ./src_bonus/validate_bonus.c
+	   ./src_bonus/validate_bonus.c \
+	   ./src_bonus/transform_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 

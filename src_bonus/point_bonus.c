@@ -59,6 +59,8 @@ void	normalize_map(t_environment *env)
 		{
 			env->map[y][x]->y -= env->height / 2;
 			env->map[y][x]->x -= env->width / 2;
+			env->map[y][x]->y *= -1;
+			env->map[y][x]->x *= -1;
 			x++;
 		}
 		y++;

@@ -69,7 +69,7 @@ void	set_background(t_img_data *img)
 		x = 0;
 		while (x <= img->width)
 		{
-			draw_pixel(img, x, y, 0x000000);
+			draw_pixel(img, x, y, 0x272727);
 			x++;
 		}
 		y++;
