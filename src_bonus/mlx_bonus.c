@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
-#include <stdio.h>
 
 int	close_window(void *params)
 {

@@ -82,8 +82,8 @@ t_environment	**get_env(void)
 
 void	init_camera(t_environment *env)
 {
-	env->camera.x_rotation = 0.0;
-	env->camera.y_rotation = 99.0;
+	env->camera.x_rotation = 45;
+	env->camera.y_rotation = 35.26;
 	env->camera.z_rotation = 0.0;
 }
 
@@ -97,6 +97,7 @@ t_environment	*init_environment(char *filename)
 	env->img.width = 1920;
 	env->img.height = 1080;
 	env->mlx.mlx = mlx_init();
+	init_camera(env);
 	title = ft_strjoin("FDF - ", filename);
 	env->mlx.win = mlx_new_window(env->mlx.mlx, env->img.width,
 			env->img.height, title);
@@ -109,8 +110,8 @@ t_environment	*init_environment(char *filename)
 		env->scale = (1920 * 0.80) / (env->highest_x - env->lowest_x);
 	else
 		env->scale = (1080 * 0.80) / (env->highest_y - env->lowest_y);
-	env->offset_x = (1790 - ((env->highest_x - env->lowest_x) * env->scale) / 2);
-	env->offset_y = (1080 - ((env->highest_y) * env->scale)) / 2;
+	env->offset_x = (1920 - ((env->highest_x) * env->scale)) / 2;
+	env->offset_y = (340 - ((env->highest_y + env->lowest_y) * env->scale)) / 2;
 	free(title);
 	return (env);
 }
