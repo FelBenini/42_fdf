@@ -32,6 +32,8 @@ t_3dpoint	*new_3dpoint(int x, int y, int z, char *color)
 	res->x = x;
 	res->y = y;
 	res->z = z;
+	res->next = NULL;
+	res->below = NULL;
 	if (color)
 	{
 		color += 3;
@@ -48,20 +50,14 @@ t_3dpoint	*new_3dpoint(int x, int y, int z, char *color)
 
 void	normalize_map(t_environment *env)
 {
-	int	x;
-	int	y;
+	int	i;
 
-	y = 0;
-	while (env->map[y])
+	i = 0;
+	while (env->map[i])
 	{
-		x = 0;
-		while (env->map[y][x])
-		{
-			env->map[y][x]->y -= env->height / 2;
-			env->map[y][x]->x -= env->width / 2;
-			env->map[y][x]->y *= -1;
-			x++;
-		}
-		y++;
+		env->map[i]->y -= env->height / 2;
+		env->map[i]->x -= env->width / 2;
+		env->map[i]->y *= -1;
+		i++;
 	}
 }

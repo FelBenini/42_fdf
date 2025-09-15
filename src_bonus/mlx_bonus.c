@@ -36,6 +36,7 @@ int	handle_keymaps(int keycode, void *params)
 	}
 	if (keycode == 65363)
 		env->offset_x += 1;
+	rotate(keycode, params);
 	return (0);
 }
 
@@ -53,6 +54,27 @@ void	change_scale(int value, t_environment *env)
 			env-> scale += 0.1;
 		env->scale *= 1.1;
 	}
+}
+
+int	rotate(int keycode, void *params)
+{
+	t_mlx_args		*mlx;
+	t_environment	*env;
+
+	mlx = (t_mlx_args *)params;
+	env = *get_env();
+	(void)mlx;
+	(void)keycode;
+	if (keycode == 65362)
+		env->camera.x_rotation += 0.1;
+	if (keycode == 65364)
+		env->camera.x_rotation -= 0.1;
+	if (keycode == 65363)
+		env->camera.y_rotation -= 0.1;
+	if (keycode == 65361)
+		env->camera.y_rotation += 0.1;
+	print_matrix(env);
+	return (0);
 }
 
 int	handle_mouse(int keycode, void *params)

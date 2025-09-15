@@ -12,21 +12,14 @@
 
 #include "fdf_bonus.h"
 
-static void	clear_matrix(t_3dpoint ***matrix)
+static void	clear_matrix(t_3dpoint **matrix)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (matrix[i])
 	{
-		j = 0;
-		while (matrix[i][j])
-		{
-			free(matrix[i][j]->color);
-			free(matrix[i][j]);
-			j++;
-		}
+		free(matrix[i]->color);
 		free(matrix[i]);
 		i++;
 	}

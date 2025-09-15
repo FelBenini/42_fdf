@@ -36,10 +36,12 @@ typedef struct s_img_data
 
 typedef struct s_3dpoint
 {
-	int		x;
-	int		y;
-	int		z;
-	char	*color;
+	int			x;
+	int			y;
+	int			z;
+	char		*color;
+	struct s_3dpoint	*next;
+	struct s_3dpoint	*below;
 }	t_3dpoint;
 
 typedef struct s_2dpoint
@@ -75,7 +77,7 @@ typedef struct s_environment
 	t_img_data		img;
 	t_mlx_args		mlx;
 	t_camera		camera;
-	t_3dpoint		***map;
+	t_3dpoint		**map;
 	int				width;
 	int				height;
 	int				highest_x;
@@ -119,7 +121,7 @@ int				handle_keymaps(int keycode, void *params);
 int				handle_mouse(int keycode, void *params);
 int				mouse_move(int x, int y, void *param);
 
-t_3dpoint		***parse_map(char *filename);
+t_3dpoint		**parse_map(char *filename);
 
 t_environment	**get_env(void);
 t_environment	*init_environment(char *filename);
@@ -138,5 +140,7 @@ void			set_background(t_img_data *img);
 int				validate_input(char *filename);
 
 void			print_matrix(t_environment *env);
+
+int				rotate(int keycode, void *params);
 
 #endif

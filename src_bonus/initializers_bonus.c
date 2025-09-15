@@ -12,27 +12,19 @@
 
 #include "fdf_bonus.h"
 
-static void	get_highest_point(t_3dpoint ***map, t_environment **environment)
+static void	get_highest_point(t_3dpoint **map, t_environment **environment)
 {
 	int				i;
-	int				j;
 	t_environment	*env;
 
 	i = 0;
 	env = *environment;
 	while (map[i])
 	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j]->z > env->highest_z)
-				env->highest_z = map[i][j]->z;
-			if (map[i][j]-> z < env->lowest_z)
-				env->lowest_z = map[i][j]->z;
-			env->height = i;
-			env->width = j;
-			j++;
-		}
+		if (map[i]->z > env->highest_z)
+			env->highest_z = map[i]->z;
+		if (map[i]-> z < env->lowest_z)
+			env->lowest_z = map[i]->z;
 		i++;
 	}
 }
@@ -93,11 +85,11 @@ t_environment	*init_environment(char *filename)
 	char			*title;
 
 	env = *get_env();
+	init_camera(env);
 	env->map = parse_map(filename);
 	env->img.width = 1920;
 	env->img.height = 1080;
 	env->mlx.mlx = mlx_init();
-	init_camera(env);
 	title = ft_strjoin("FDF - ", filename);
 	env->mlx.win = mlx_new_window(env->mlx.mlx, env->img.width,
 			env->img.height, title);
@@ -110,8 +102,8 @@ t_environment	*init_environment(char *filename)
 		env->scale = (1920 * 0.80) / (env->highest_x - env->lowest_x);
 	else
 		env->scale = (1080 * 0.80) / (env->highest_y - env->lowest_y);
-	env->offset_x = (1920 - ((env->highest_x) * env->scale)) / 2;
-	env->offset_y = (340 - ((env->highest_y + env->lowest_y) * env->scale)) / 2;
+	env->offset_x = (3520 - ((env->highest_x) * env->scale)) / 2;
+	env->offset_y = (1040 - ((env->highest_y) * env->scale)) / 2;
 	free(title);
 	return (env);
 }

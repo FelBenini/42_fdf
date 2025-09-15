@@ -14,7 +14,7 @@ NAME = fdf
 
 CC = cc
 
-CFLAGS = -O3 -Wextra -Wall -Werror
+CFLAGS = -Wextra -Wall -Werror -O3
 
 MINILIB = ./minilibx/libmlx_Linux.a
 
