@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:53:49 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/07 15:14:31 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:47:35 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,49 +61,47 @@ static	void	get_dimensions(t_3dpoint ***matrix)
 	env->height = y;
 }
 
-t_3dpoint **convert_matrix_to_arr(t_3dpoint ***matrix)
+t_3dpoint	**convert_matrix_to_arr(t_3dpoint ***matrix)
 {
-    t_3dpoint       **res;
-    int             i;
-    int             x;
-    int             y;
-    int             total_points;
+	t_3dpoint	**res;
+	int			i;
+	int			x;
+	int			y;
+	int			total_points;
 
-    total_points = 0;
-    y = 0;
-    while (matrix[y])
-    {
-        x = 0;
-        while (matrix[y][x])
-        {
-            total_points++;
-            x++;
-        }
-        y++;
-    }
-    res = ft_calloc(total_points + 1, sizeof(t_3dpoint *));
-    if (!res)
-		return (NULL);
-    i = 0;
-    y = 0;
-    while (matrix[y])
-    {
-        x = 0;
-        while (matrix[y][x])
-        {
-            res[i] = matrix[y][x];
-            if (matrix[y][x + 1])
-                res[i]->next = matrix[y][x + 1];
-            if (matrix[y + 1] && matrix[y + 1][x])
-                res[i]->below = matrix[y + 1][x];
-            x++;
-            i++;
-        }
-        free(matrix[y]);
-        y++;
-    }
-    free(matrix);
-    return (res);
+	total_points = 0;
+	y = 0;
+	while (matrix[y])
+	{
+		x = 0;
+		while (matrix[y][x])
+		{
+			total_points++;
+			x++;
+		}
+		y++;
+	}
+	res = ft_calloc(total_points + 1, sizeof(t_3dpoint *));
+	i = 0;
+	y = 0;
+	while (matrix[y])
+	{
+		x = 0;
+		while (matrix[y][x])
+		{
+			res[i] = matrix[y][x];
+			if (matrix[y][x + 1])
+				res[i]->next = matrix[y][x + 1];
+			if (matrix[y + 1] && matrix[y + 1][x])
+				res[i]->below = matrix[y + 1][x];
+			x++;
+			i++;
+		}
+		free(matrix[y]);
+		y++;
+	}
+	free(matrix);
+	return (res);
 }
 
 t_3dpoint	**parse_map(char *filename)

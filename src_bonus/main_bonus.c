@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:48:48 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/07 15:03:29 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/15 20:01:22 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,12 @@ int	main(int argc, char *argv[])
 		return (1);
 	env = init_environment(argv[1]);
 	print_matrix(env);
-	mlx_do_key_autorepeaton(env->mlx.mlx);
+	mlx_mouse_get_pos(env->mlx.mlx, env->mlx.win,
+		&env->keys.last_x, &env->keys.last_y);
 	mlx_hook(env->mlx.win, 17, 0, close_window, &env->mlx);
-	mlx_key_hook(env->mlx.win, handle_keymaps, &env->mlx);
-	mlx_hook(env->mlx.win, 4, 1L << 2, handle_mouse, &env->mlx);
-	mlx_hook(env->mlx.win, 6, 1L << 6, mouse_move, &env);
+	mlx_hook(env->mlx.win, 2, 1L << 0, handle_keymaps, env);
+	mlx_hook(env->mlx.win, 4, 1L << 2, mouse_press, env);
+	mlx_hook(env->mlx.win, 5, 1L << 3, mouse_drop, env);
 	mlx_loop(env->mlx.mlx);
 	clean_env(env);
 	return (0);

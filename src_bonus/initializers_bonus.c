@@ -72,11 +72,13 @@ t_environment	**get_env(void)
 	return (&env);
 }
 
-void	init_camera(t_environment *env)
+void	init_structs(t_environment *env)
 {
-	env->camera.x_rotation = 45;
-	env->camera.y_rotation = 35.26;
+	env->camera.x_rotation = 0.0;
+	env->camera.y_rotation = 0.0;
 	env->camera.z_rotation = 0.0;
+	env->keys.last_x = 0;
+	env->keys.last_y = 0;
 }
 
 t_environment	*init_environment(char *filename)
@@ -85,7 +87,7 @@ t_environment	*init_environment(char *filename)
 	char			*title;
 
 	env = *get_env();
-	init_camera(env);
+	init_structs(env);
 	env->map = parse_map(filename);
 	env->img.width = 1920;
 	env->img.height = 1080;
@@ -102,7 +104,7 @@ t_environment	*init_environment(char *filename)
 		env->scale = (1920 * 0.80) / (env->highest_x - env->lowest_x);
 	else
 		env->scale = (1080 * 0.80) / (env->highest_y - env->lowest_y);
-	env->offset_x = (3520 - ((env->highest_x) * env->scale)) / 2;
+	env->offset_x = (1520 - ((env->highest_x) * env->scale)) / 2;
 	env->offset_y = (1040 - ((env->highest_y) * env->scale)) / 2;
 	free(title);
 	return (env);

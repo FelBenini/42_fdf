@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:51:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/07 15:15:16 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/15 20:01:35 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ typedef struct s_img_data
 
 typedef struct s_3dpoint
 {
-	int			x;
-	int			y;
-	int			z;
-	char		*color;
+	int					x;
+	int					y;
+	int					z;
+	char				*color;
 	struct s_3dpoint	*next;
 	struct s_3dpoint	*below;
 }	t_3dpoint;
@@ -72,12 +72,20 @@ typedef struct s_camera
 	double	z_rotation;
 }	t_camera;
 
+typedef struct s_keys
+{
+	int	scroll_pressed;
+	int	last_x;
+	int	last_y;
+}	t_keys;
+
 typedef struct s_environment
 {
 	t_img_data		img;
 	t_mlx_args		mlx;
 	t_camera		camera;
 	t_3dpoint		**map;
+	t_keys			keys;
 	int				width;
 	int				height;
 	int				highest_x;
@@ -118,8 +126,6 @@ void			normalize_map(t_environment *env);
 
 int				close_window(void *params);
 int				handle_keymaps(int keycode, void *params);
-int				handle_mouse(int keycode, void *params);
-int				mouse_move(int x, int y, void *param);
 
 t_3dpoint		**parse_map(char *filename);
 
@@ -142,5 +148,9 @@ int				validate_input(char *filename);
 void			print_matrix(t_environment *env);
 
 int				rotate(int keycode, void *params);
+void			change_scale(int value, t_environment *env);
+
+int				mouse_press(int key, int x, int y, void *param);
+int				mouse_drop(int key, int x, int y, void *param);
 
 #endif
