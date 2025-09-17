@@ -39,7 +39,7 @@ typedef struct s_3dpoint
 	int					x;
 	int					y;
 	int					z;
-	char				*color;
+	int					*color;
 	struct s_3dpoint	*next;
 	struct s_3dpoint	*below;
 }	t_3dpoint;
@@ -67,8 +67,14 @@ typedef struct s_bresenham
 
 typedef struct s_camera
 {
-	double	x_rotation;
+	double	x_cos;
+	double	y_cos;
+	double	z_cos;
+	double	x_sin;
+	double	y_sin;
+	double	z_sin;
 	double	y_rotation;
+	double	x_rotation;
 	double	z_rotation;
 }	t_camera;
 
@@ -97,6 +103,7 @@ typedef struct s_environment
 	double			scale;
 	int				offset_x;
 	int				offset_y;
+	double			z_factor;
 	unsigned int	colors[3];
 }	t_environment;
 

@@ -15,7 +15,7 @@
 int	mouse_press(int key, int x, int y, void *param)
 {
 	t_environment	*env;
-	
+
 	env = (t_environment *)param;
 	env->keys.last_x = x;
 	env->keys.last_y = y;
@@ -37,13 +37,4 @@ int	mouse_drop(int key, int x, int y, void *param)
 	if (key == 2)
 		env->keys.scroll_pressed = 0;
 	return (0);
-}
-
-void	angle(double *ang, float value)
-{
-	*ang += value;
-	if (*ang < 0)
-			*ang = 360 + *ang;
-	if (*ang >= 360)
-			*ang = *ang - 360;
 }

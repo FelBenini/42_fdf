@@ -61,29 +61,11 @@ static	void	get_dimensions(t_3dpoint ***matrix)
 	env->height = y;
 }
 
-t_3dpoint	**convert_matrix_to_arr(t_3dpoint ***matrix)
+static void	fill_array(t_3dpoint ***matrix, int x, int y, t_3dpoint **res)
 {
-	t_3dpoint	**res;
-	int			i;
-	int			x;
-	int			y;
-	int			total_points;
+	int	i;
 
-	total_points = 0;
-	y = 0;
-	while (matrix[y])
-	{
-		x = 0;
-		while (matrix[y][x])
-		{
-			total_points++;
-			x++;
-		}
-		y++;
-	}
-	res = ft_calloc(total_points + 1, sizeof(t_3dpoint *));
 	i = 0;
-	y = 0;
 	while (matrix[y])
 	{
 		x = 0;
@@ -101,6 +83,30 @@ t_3dpoint	**convert_matrix_to_arr(t_3dpoint ***matrix)
 		y++;
 	}
 	free(matrix);
+}
+
+t_3dpoint	**convert_matrix_to_arr(t_3dpoint ***matrix)
+{
+	t_3dpoint	**res;
+	int			x;
+	int			y;
+	int			total_points;
+
+	total_points = 0;
+	y = 0;
+	while (matrix[y])
+	{
+		x = 0;
+		while (matrix[y][x])
+		{
+			total_points++;
+			x++;
+		}
+		y++;
+	}
+	res = ft_calloc(total_points + 1, sizeof(t_3dpoint *));
+	y = 0;
+	fill_array(matrix, x, y, res);
 	return (res);
 }
 

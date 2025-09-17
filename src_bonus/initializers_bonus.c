@@ -27,6 +27,11 @@ static void	get_highest_point(t_3dpoint **map, t_environment **environment)
 			env->lowest_z = map[i]->z;
 		i++;
 	}
+	env->z_factor = 10.00 / (double)(env->highest_z - env->lowest_z);
+	if (env->z_factor > 0.5)
+		env->z_factor = 0.5;
+	if (env->z_factor < 0.3)
+		env->z_factor = 0.3;
 }
 
 void	get_highest_projections(t_3dpoint *point_3d)
@@ -67,6 +72,7 @@ t_environment	**get_env(void)
 	env->width = 0;
 	env->height = 0;
 	env->scale = 1.5;
+	env->z_factor = 0.5;
 	if (!env)
 		return (NULL);
 	return (&env);
@@ -74,9 +80,12 @@ t_environment	**get_env(void)
 
 void	init_structs(t_environment *env)
 {
-	env->camera.x_rotation = 0.0;
-	env->camera.y_rotation = 0.0;
-	env->camera.z_rotation = 0.0;
+	env->camera.x_cos = cos(0.0);
+	env->camera.x_sin = sin(0.0);
+	env->camera.z_cos = cos(0.0);
+	env->camera.z_sin = sin(0.0);
+	env->camera.y_cos = cos(0.0);
+	env->camera.y_sin = sin(0.0);
 	env->keys.last_x = 0;
 	env->keys.last_y = 0;
 }

@@ -54,19 +54,30 @@ void	change_scale(int value, t_environment *env)
 	}
 }
 
+static void	update_cos_sin(t_environment *env)
+{
+	env->camera.x_cos = cos(env->camera.x_rotation);
+	env->camera.x_sin = sin(env->camera.x_rotation);
+	env->camera.y_cos = cos(env->camera.y_rotation);
+	env->camera.y_sin = sin(env->camera.y_rotation);
+	env->camera.z_cos = cos(env->camera.z_rotation);
+	env->camera.z_sin = sin(env->camera.z_rotation);
+}
+
 int	rotate(int keycode, void *params)
 {
 	t_environment	*env;
 
 	env = (t_environment *)params;
 	if (keycode == 65362)
-		env->camera.x_rotation += 0.01;
+		env->camera.x_rotation += 0.05;
 	if (keycode == 65364)
-		env->camera.x_rotation -= 0.01;
+		env->camera.x_rotation -= 0.05;
 	if (keycode == 65363)
-		env->camera.y_rotation += 0.01;
+		env->camera.y_rotation += 0.05;
 	if (keycode == 65361)
-		env->camera.y_rotation -= 0.01;
+		env->camera.y_rotation -= 0.05;
+	update_cos_sin(env);
 	print_matrix(env);
 	return (0);
 }

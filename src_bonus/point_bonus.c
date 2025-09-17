@@ -29,6 +29,7 @@ t_3dpoint	*new_3dpoint(int x, int y, int z, char *color)
 	static int	count;
 
 	res = (t_3dpoint *)malloc(sizeof(t_3dpoint));
+	res->color = (int *)malloc(sizeof(int));
 	res->x = x;
 	res->y = y;
 	res->z = z;
@@ -37,8 +38,8 @@ t_3dpoint	*new_3dpoint(int x, int y, int z, char *color)
 	if (color)
 	{
 		color += 3;
-		res->color = ft_strdup(color);
-		ft_strupcase(res->color);
+		ft_strupcase(color);
+		*(res->color) = ft_atoi_base(color, "0123456789ABCDEF");
 	}
 	else
 		res->color = NULL;
@@ -58,6 +59,7 @@ void	normalize_map(t_environment *env)
 		env->map[i]->y -= env->height / 2;
 		env->map[i]->x -= env->width / 2;
 		env->map[i]->y *= -1;
+		env->map[i]->x *= -1;
 		i++;
 	}
 }
