@@ -86,6 +86,9 @@ void	init_structs(t_environment *env)
 	env->camera.z_sin = sin(0.0);
 	env->camera.y_cos = cos(0.0);
 	env->camera.y_sin = sin(0.0);
+	env->camera.x_rotation = 0.0;
+	env->camera.y_rotation = 0.0;
+	env->camera.z_rotation = 0.0;
 	env->keys.last_x = 0;
 	env->keys.last_y = 0;
 }

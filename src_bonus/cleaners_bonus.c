@@ -19,11 +19,12 @@ static void	clear_matrix(t_3dpoint **matrix)
 	i = 0;
 	while (matrix[i])
 	{
-		free(matrix[i]->color);
 		free(matrix[i]);
+		matrix[i] = NULL;
 		i++;
 	}
 	free(matrix);
+	matrix = NULL;
 }
 
 void	clear_splitted(char **splitted)

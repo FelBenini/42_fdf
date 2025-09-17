@@ -39,7 +39,8 @@ typedef struct s_3dpoint
 	int					x;
 	int					y;
 	int					z;
-	int					*color;
+	int					color;
+	int					has_color;
 	struct s_3dpoint	*next;
 	struct s_3dpoint	*below;
 }	t_3dpoint;

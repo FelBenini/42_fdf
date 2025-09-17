@@ -63,8 +63,8 @@ t_2dpoint	isometric_projection(t_3dpoint *point3d)
 	res.x = (int)(x_val * env->scale);
 	res.y = (int)(y_val * env->scale);
 	res.height = point3d->z;
-	if (point3d->color)
-		res.color = *(point3d->color);
+	if (point3d->has_color)
+		res.color = point3d->color;
 	else
 		res.color = get_color(res.height);
 	res.x += env->offset_x;

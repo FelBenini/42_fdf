@@ -29,20 +29,21 @@ t_3dpoint	*new_3dpoint(int x, int y, int z, char *color)
 	static int	count;
 
 	res = (t_3dpoint *)malloc(sizeof(t_3dpoint));
-	res->color = (int *)malloc(sizeof(int));
 	res->x = x;
 	res->y = y;
 	res->z = z;
 	res->next = NULL;
 	res->below = NULL;
+	res->color = 0;
+	res->has_color = 1;
 	if (color)
 	{
 		color += 3;
 		ft_strupcase(color);
-		*(res->color) = ft_atoi_base(color, "0123456789ABCDEF");
+		res->color = ft_atoi_base(color, "0123456789ABCDEF");
 	}
 	else
-		res->color = NULL;
+		res->has_color = 0;
 	get_highest_projections(res);
 	count++;
 	ft_printf("\r⏏️  %d Map points parsed.", count);
