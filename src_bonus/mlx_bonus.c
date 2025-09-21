@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
+#include <stdio.h>
 
 int	close_window(void *params)
 {
@@ -20,6 +21,18 @@ int	close_window(void *params)
 	mlx_loop_end(mlx->mlx);
 	ft_printf("\n👋 Leaving now, bye!\n");
 	return (0);
+}
+
+void	translate(int keycode, t_environment *env)
+{
+	if (keycode == 119)
+		env->offset_y -= 5;
+	if (keycode == 115)
+		env->offset_y += 5;
+	if (keycode == 100)
+		env->offset_x += 5;
+	if (keycode == 97)
+		env->offset_x -= 5;
 }
 
 int	handle_keymaps(int keycode, void *params)
@@ -34,6 +47,7 @@ int	handle_keymaps(int keycode, void *params)
 	}
 	if (keycode == 65363)
 		env->offset_x += 1;
+	translate(keycode, env);
 	rotate(keycode, params);
 	return (0);
 }
@@ -79,5 +93,6 @@ int	rotate(int keycode, void *params)
 		env->camera.y_rotation -= 0.05;
 	update_cos_sin(env);
 	print_matrix(env);
+	printf("%f %f \n", env->camera.x_rotation, env->camera.y_rotation);
 	return (0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initializers.c                                     :+:      :+:    :+:   */
+/*   initializers_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 13:33:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/07 20:22:02 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/18 19:55:35 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ t_environment	**get_env(void)
 	env->lowest_z = 0;
 	env->offset_x = 0;
 	env->offset_y = 0;
-	env->colors[0] = 0x646464;
-	env->colors[1] = 0xD4D4D4;
-	env->colors[2] = 0xFFFFFF;
+	env->colors[0] = 0x878787;
+	env->colors[1] = 0xFDFDFD;
+	env->colors[2] = 0xFDFDFD;
 	env->width = 0;
 	env->height = 0;
 	env->scale = 1.5;
@@ -78,7 +78,7 @@ t_environment	**get_env(void)
 	return (&env);
 }
 
-void	init_structs(t_environment *env)
+void	init_structs(t_environment *env, char *filename)
 {
 	env->camera.x_cos = cos(0.0);
 	env->camera.x_sin = sin(0.0);
@@ -91,6 +91,12 @@ void	init_structs(t_environment *env)
 	env->camera.z_rotation = 0.0;
 	env->keys.last_x = 0;
 	env->keys.last_y = 0;
+	env->img.width = 1920;
+	env->img.height = 1080;
+	env->menu.height = 1080;
+	env->menu.width = 280;
+	env->map = parse_map(filename);
+	env->mlx.mlx = mlx_init();
 }
 
 t_environment	*init_environment(char *filename)
@@ -99,24 +105,24 @@ t_environment	*init_environment(char *filename)
 	char			*title;
 
 	env = *get_env();
-	init_structs(env);
-	env->map = parse_map(filename);
-	env->img.width = 1920;
-	env->img.height = 1080;
-	env->mlx.mlx = mlx_init();
+	init_structs(env, filename);
 	title = ft_strjoin("FDF - ", filename);
 	env->mlx.win = mlx_new_window(env->mlx.mlx, env->img.width,
 			env->img.height, title);
 	env->img.img = mlx_new_image(env->mlx.mlx, env->img.width, env->img.height);
 	env->img.addr = mlx_get_data_addr(env->img.img, &env->img.bits_per_pixel,
 			&env->img.line_length, &env->img.endian);
+	env->menu.img = mlx_new_image(env->mlx.mlx, env->menu.width,
+			env->menu.height);
+	env->menu.addr = mlx_get_data_addr(env->menu.img, &env->menu.bits_per_pixel,
+			&env->menu.line_length, &env->menu.endian);
 	get_highest_point(env->map, &env);
 	normalize_map(env);
 	if (env->highest_x - env->lowest_x < env->highest_y - env->lowest_y)
 		env->scale = (1920 * 0.80) / (env->highest_x - env->lowest_x);
 	else
 		env->scale = (1080 * 0.80) / (env->highest_y - env->lowest_y);
-	env->offset_x = (1520 - ((env->highest_x) * env->scale)) / 2;
+	env->offset_x = (1620 - ((env->highest_x) * env->scale)) / 2;
 	env->offset_y = (1040 - ((env->highest_y) * env->scale)) / 2;
 	free(title);
 	return (env);

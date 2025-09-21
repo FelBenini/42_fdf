@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:51:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/15 20:01:35 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/18 19:02:15 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_keys
 typedef struct s_environment
 {
 	t_img_data		img;
+	t_img_data		menu;
 	t_mlx_args		mlx;
 	t_camera		camera;
 	t_3dpoint		**map;
@@ -160,5 +161,7 @@ void			change_scale(int value, t_environment *env);
 
 int				mouse_press(int key, int x, int y, void *param);
 int				mouse_drop(int key, int x, int y, void *param);
+
+void			print_menu(t_environment *env);
 
 #endif

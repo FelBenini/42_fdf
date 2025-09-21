@@ -6,7 +6,7 @@
 #    By: fbenini- <your@mail.com>                   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/25 14:39:13 by fbenini-          #+#    #+#              #
-#    Updated: 2025/09/15 19:50:03 by fbenini-         ###   ########.fr        #
+#    Updated: 2025/09/18 18:53:45 by fbenini-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,8 @@ SRCS_BONUS = ./src_bonus/main_bonus.c \
 	   ./src_bonus/cleaners_bonus.c \
 	   ./src_bonus/colors_bonus.c \
 	   ./src_bonus/validate_bonus.c \
-	   ./src_bonus/mouse_control_bonus.c
+	   ./src_bonus/mouse_control_bonus.c \
+	   ./src_bonus/menu_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 

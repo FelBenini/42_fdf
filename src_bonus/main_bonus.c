@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:48:48 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/15 20:01:22 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/18 18:54:20 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	print_matrix(t_environment *env)
 		i++;
 	}
 	mlx_put_image_to_window(env->mlx.mlx, env->mlx.win, env->img.img, 0, 0);
+	print_menu(env);
 }
 
 int	main(int argc, char *argv[])

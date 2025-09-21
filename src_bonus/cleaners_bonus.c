@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleaners.c                                         :+:      :+:    :+:   */
+/*   cleaners_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 15:33:23 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/07 15:14:42 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/18 19:03:30 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	clear_splitted(char **splitted)
 void	clean_env(t_environment *env)
 {
 	mlx_destroy_image(env->mlx.mlx, env->img.img);
+	mlx_destroy_image(env->mlx.mlx, env->menu.img);
 	mlx_destroy_window(env->mlx.mlx, env->mlx.win);
 	mlx_destroy_display(env->mlx.mlx);
 	clear_matrix(env->map);
