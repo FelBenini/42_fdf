@@ -109,21 +109,15 @@ typedef struct s_environment
 	unsigned int	colors[3];
 }	t_environment;
 
-typedef struct s_rgb
-{
-	unsigned int	r;
-	unsigned int	g;
-	unsigned int	b;
-}	t_rgb;
-
 typedef struct s_gradient_args
 {
 	double			normalized_z_t;
 	double			segment_t;
-	t_rgb			start_rgb;
-	t_rgb			end_rgb;
+	unsigned int	start_rgb;
+	unsigned int	end_rgb;
 }	t_gradient_args;
 
+int				interpolate_color(int color1, int color2, double t);
 void			draw_pixel(t_img_data *data, int x, int y, unsigned int color);
 void			draw_line(t_img_data *data, t_2dpoint from,
 					t_2dpoint to, int start);
@@ -146,11 +140,6 @@ void			clean_env(t_environment *env);
 void			clear_splitted(char **splitted);
 
 unsigned int	get_color(int height);
-t_rgb			create_rgba(unsigned int color);
-unsigned int	interpolate_rgba(t_rgb start_comp, t_rgb end_comp,
-					double t);
-t_rgb			create_rgba(unsigned int color);
-void			set_background(t_img_data *img);
 
 int				validate_input(char *filename);
 

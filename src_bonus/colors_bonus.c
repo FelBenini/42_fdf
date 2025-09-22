@@ -12,33 +12,46 @@
 
 #include "fdf_bonus.h"
 
-static unsigned char	get_component(unsigned int color, int shift)
+static int	get_component(int value, int shift)
 {
-	return ((unsigned char)((color >> shift) & 0xFF));
+	return ((value >> shift) & 0xFF);
 }
 
-unsigned int	interpolate_rgba(t_rgb start_comp, t_rgb end_comp,
-									double t)
+int	interpolate_color(int color1, int color2, double t)
 {
-	t_rgb	res;
+	int		r;
+	int		g;
+	int		b;
 
-	res.r = (unsigned char)(start_comp.r + t
-			* (end_comp.r - start_comp.r));
-	res.g = (unsigned char)(start_comp.g + t
-			* (end_comp.g - start_comp.g));
-	res.b = (unsigned char)(start_comp.b + t
-			* (end_comp.b - start_comp.b));
-	return ((res.r << 16) | (res.g << 8) | res.b);
+	r = get_component(color1, 16) + t
+		* (get_component(color2, 16) - get_component(color1, 16));
+	g = get_component(color1, 8) + t
+		* (get_component(color2, 8) - get_component(color1, 8));
+	b = get_component(color1, 0) + t
+		* (get_component(color2, 0) - get_component(color1, 0));
+	return ((r << 16) | (g << 8) | b);
 }
 
-t_rgb	create_rgba(unsigned int color)
+unsigned int	get_terrain_color(int height, t_environment *env)
 {
-	t_rgb	res;
+	double	t;
+	int		color1;
+	int		color2;
 
-	res.r = get_component(color, 16);
-	res.g = get_component(color, 8);
-	res.b = get_component(color, 0);
-	return (res);
+	color1 = env->colors[1];
+	color2 = env->colors[2];
+	if (env->highest_z != env->lowest_z)
+		t = (double)(height - env->lowest_z)
+			/ (env->highest_z - env->lowest_z);
+	else
+		t = 0.0;
+	if (height < 0)
+	{
+		color1 = env->colors[0];
+		color2 = env->colors[1];
+	}
+	t = ft_norm(t);
+	return (interpolate_color(color1, color2, t));
 }
 
 unsigned int	get_color(int height)
@@ -47,31 +60,14 @@ unsigned int	get_color(int height)
 	t_gradient_args	g;
 
 	env = *get_env();
-	g.start_rgb = create_rgba(env->colors[0]);
-	g.end_rgb = create_rgba(env->colors[1]);
+	return (get_terrain_color(height, env));
+	g.start_rgb = env->colors[0];
+	g.end_rgb = env->colors[1];
 	if (env->highest_z != env->lowest_z)
 		g.normalized_z_t = (double)(height - env->lowest_z)
 			/ (env->highest_z - env->lowest_z);
 	else
 		g.normalized_z_t = 0.0;
 	g.normalized_z_t = ft_norm(g.normalized_z_t);
-	return (interpolate_rgba(g.start_rgb, g.end_rgb, g.normalized_z_t));
-}
-
-void	set_background(t_img_data *img)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y <= img->height)
-	{
-		x = 0;
-		while (x <= img->width)
-		{
-			draw_pixel(img, x, y, 0x272727);
-			x++;
-		}
-		y++;
-	}
+	return (interpolate_color(g.start_rgb, g.end_rgb, g.normalized_z_t));
 }

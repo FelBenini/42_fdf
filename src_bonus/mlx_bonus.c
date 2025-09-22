@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
-#include <stdio.h>
 
 int	close_window(void *params)
 {
@@ -93,6 +92,5 @@ int	rotate(int keycode, void *params)
 		env->camera.y_rotation -= 0.05;
 	update_cos_sin(env);
 	print_matrix(env);
-	printf("%f %f \n", env->camera.x_rotation, env->camera.y_rotation);
 	return (0);
 }

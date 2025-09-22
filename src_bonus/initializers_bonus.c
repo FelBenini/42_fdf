@@ -66,9 +66,9 @@ t_environment	**get_env(void)
 	env->lowest_z = 0;
 	env->offset_x = 0;
 	env->offset_y = 0;
-	env->colors[0] = 0x878787;
-	env->colors[1] = 0xFDFDFD;
-	env->colors[2] = 0xFDFDFD;
+	env->colors[0] = 0x51b1fc;
+	env->colors[1] = 0xD98C27;
+	env->colors[2] = 0xFFA97D;
 	env->width = 0;
 	env->height = 0;
 	env->scale = 1.5;

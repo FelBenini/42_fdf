@@ -12,6 +12,24 @@
 
 #include "fdf_bonus.h"
 
+static void	set_background(t_img_data *img)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y <= img->height)
+	{
+		x = 0;
+		while (x <= img->width)
+		{
+			draw_pixel(img, x, y, 0x272727);
+			x++;
+		}
+		y++;
+	}
+}
+
 static void	create_lines(t_3dpoint **matrix, t_img_data *img_data,
 						int i)
 {

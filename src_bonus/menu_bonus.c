@@ -45,7 +45,7 @@ static void	put_banner(void)
 	int	color;
 	int	r;
 
-	start = 50;
+	start = 32;
 	color = 0xFFFFFF;
 	r = 1700;
 	put_str(start, r, color, "  .-.          ___    .-.");
@@ -67,4 +67,5 @@ void	print_menu(t_environment *env)
 	mlx_put_image_to_window(env->mlx.mlx, env->mlx.win,
 		env->menu.img, 1920 - env->menu.width, 0);
 	put_banner();
+	put_str(188, 1672, 0xFFFFFF, "___________________________________");
 }

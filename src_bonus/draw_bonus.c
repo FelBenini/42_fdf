@@ -50,26 +50,6 @@ static void	init_bresenham(t_bresenham *bresenham,
 			bresenham->delta_y);
 }
 
-static int	get_component(int value, int shift)
-{
-	return ((value >> shift) & 0xFF);
-}
-
-static int	interpolate_color(int color1, int color2, double t)
-{
-	int		r;
-	int		g;
-	int		b;
-
-	r = get_component(color1, 16) + t
-		* (get_component(color2, 16) - get_component(color1, 16));
-	g = get_component(color1, 8) + t
-		* (get_component(color2, 8) - get_component(color1, 8));
-	b = get_component(color1, 0) + t
-		* (get_component(color2, 0) - get_component(color1, 0));
-	return ((r << 16) | (g << 8) | b);
-}
-
 void	draw_line(t_img_data *data, t_2dpoint from, t_2dpoint to, int start)
 {
 	t_bresenham	b;
