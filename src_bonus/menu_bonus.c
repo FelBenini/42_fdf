@@ -67,5 +67,8 @@ void	print_menu(t_environment *env)
 	mlx_put_image_to_window(env->mlx.mlx, env->mlx.win,
 		env->menu.img, 1920 - env->menu.width, 0);
 	put_banner();
-	put_str(188, 1672, 0xFFFFFF, "___________________________________");
+	put_str(188, 1672, 0xFFFFFF, "_______________COLORS________________");
+	put_str(212, 1678, 0xFFFFFF, "0. DEFAULT");
+	put_str(232, 1678, 0xFFFFFF, "1. TERRAIN");
+	put_str(248, 1672, 0xFFFFFF, "_____________________________________");
 }

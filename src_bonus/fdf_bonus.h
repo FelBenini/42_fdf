@@ -107,6 +107,8 @@ typedef struct s_environment
 	int				offset_y;
 	double			z_factor;
 	unsigned int	colors[3];
+	double			bending_factor;
+	int				is_color_terrain;
 }	t_environment;
 
 typedef struct s_gradient_args
@@ -129,6 +131,7 @@ void			normalize_map(t_environment *env);
 
 int				close_window(void *params);
 int				handle_keymaps(int keycode, void *params);
+void			handle_color_change(int key, t_environment *env);
 
 t_3dpoint		**parse_map(char *filename);
 

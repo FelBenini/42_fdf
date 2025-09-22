@@ -12,6 +12,23 @@
 
 #include "fdf_bonus.h"
 
+void	handle_color_change(int key, t_environment *env)
+{
+	if (key == 48)
+	{
+		env->colors[0] = 0x606060;
+		env->colors[1] = 0xeaeaea;
+		env->is_color_terrain = 0;
+	}
+	if (key == 49)
+	{
+		env->colors[0] = 0x51b1fc;
+		env->colors[1] = 0xb9670c;
+		env->colors[2] = 0xffa85a;
+		env->is_color_terrain = 1;
+	}
+}
+
 static int	get_component(int value, int shift)
 {
 	return ((value >> shift) & 0xFF);
@@ -60,7 +77,8 @@ unsigned int	get_color(int height)
 	t_gradient_args	g;
 
 	env = *get_env();
-	return (get_terrain_color(height, env));
+	if (env->is_color_terrain)
+		return (get_terrain_color(height, env));
 	g.start_rgb = env->colors[0];
 	g.end_rgb = env->colors[1];
 	if (env->highest_z != env->lowest_z)

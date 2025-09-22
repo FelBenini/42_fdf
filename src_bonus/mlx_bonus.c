@@ -47,6 +47,11 @@ int	handle_keymaps(int keycode, void *params)
 	if (keycode == 65363)
 		env->offset_x += 1;
 	translate(keycode, env);
+	handle_color_change(keycode, env);
+	if (keycode == 98)
+		env->bending_factor += 0.1;
+	if (keycode == 118)
+		env->bending_factor -= 0.1;
 	rotate(keycode, params);
 	return (0);
 }
