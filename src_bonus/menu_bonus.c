@@ -70,5 +70,6 @@ void	print_menu(t_environment *env)
 	put_str(188, 1672, 0xFFFFFF, "_______________COLORS________________");
 	put_str(212, 1678, 0xFFFFFF, "0. DEFAULT");
 	put_str(232, 1678, 0xFFFFFF, "1. TERRAIN");
-	put_str(248, 1672, 0xFFFFFF, "_____________________________________");
+	put_str(300, 1672, 0xFFFFFF, "_______________CONTROLS________________");
+
 }
