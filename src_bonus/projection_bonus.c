@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:00:59 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/23 14:56:10 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/23 15:00:37 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_2dpoint	isometric_projection(t_3dpoint *point3d)
 		res.color = point3d->color;
 	else
 		res.color = get_color(res.height);
-	res.x += env->offset_x;
-	res.y += env->offset_y;
+	res.x += env->offset_x + env->camera.offset_x;
+	res.y += env->offset_y + env->camera.offset_y;
 	return (res);
 }

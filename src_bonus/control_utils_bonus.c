@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:42:40 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/23 14:44:07 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/23 15:01:27 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	translate(int keycode, t_environment *env)
 {
 	if (keycode == 119)
-		env->offset_y -= 5;
+		env->camera.offset_y -= 5;
 	if (keycode == 115)
-		env->offset_y += 5;
+		env->camera.offset_y += 5;
 	if (keycode == 100)
-		env->offset_x += 5;
+		env->camera.offset_x += 5;
 	if (keycode == 97)
-		env->offset_x -= 5;
+		env->camera.offset_x -= 5;
 }
 
 void	change_scale(int value, t_environment *env)
@@ -65,5 +65,11 @@ int	rotate(int keycode, void *params)
 		env->camera.y_rotation -= 0.05;
 	update_cos_sin(env);
 	print_matrix(env);
+	return (0);
+}
+
+int	handle_numpad(int keycode, t_environment *env)
+{
+
 	return (0);
 }

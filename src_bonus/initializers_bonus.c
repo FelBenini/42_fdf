@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 13:33:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/18 19:55:35 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/23 14:59:36 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void	init_structs(t_environment *env, char *filename)
 	env->camera.x_rotation = 0.0;
 	env->camera.y_rotation = 0.0;
 	env->camera.z_rotation = 0.0;
+	env->camera.offset_x = 0;
+	env->camera.offset_y = 0;
 	env->keys.last_x = 0;
 	env->keys.last_y = 0;
 	env->img.width = 1920;

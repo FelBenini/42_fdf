@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:51:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/23 14:44:02 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/23 14:59:55 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ typedef struct s_camera
 	double	y_rotation;
 	double	x_rotation;
 	double	z_rotation;
+	int		offset_x;
+	int		offset_y;
 }	t_camera;
 
 typedef struct s_keys
