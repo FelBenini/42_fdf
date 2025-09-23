@@ -22,6 +22,37 @@ int	close_window(void *params)
 	return (0);
 }
 
+static void	reset_perspective(t_environment *env, double x_angle, double y_angle)
+{
+	env->bending_factor = 0;
+	env->camera.offset_x = 0;
+	env->camera.offset_y = 0;
+	env->camera.y_rotation = y_angle;
+	env->camera.x_rotation = x_angle;
+}
+
+static void	handle_numpad(int keycode, t_environment *env)
+{
+	if (keycode == 65429)
+		reset_perspective(env, 0, 0);
+	if (keycode == 65430)
+		reset_perspective(env, 0.73, 0);
+	if (keycode == 65436)
+		reset_perspective(env, 1.57, 0);
+	if (keycode == 65437)
+		reset_perspective(env, 0.73, -0.73);
+	if (keycode == 65433)
+		reset_perspective(env, 1.57, -0.73);
+	if (keycode == 65435)
+		reset_perspective(env, 1.57, -1.57);
+	if (keycode == 65432)
+		reset_perspective(env, 0.73, -1.57);
+	if (keycode == 65431)
+		reset_perspective(env, 0, -0.73);
+	if (keycode == 65434)
+		reset_perspective(env, 0, -1.57);
+}
+
 int	handle_keymaps(int keycode, void *params)
 {
 	t_environment	*env;
@@ -43,6 +74,7 @@ int	handle_keymaps(int keycode, void *params)
 		env->z_factor -= 0.01;
 	if (keycode == 93)
 		env->z_factor += 0.01;
+	handle_numpad(keycode, env);
 	rotate(keycode, params);
 	return (0);
 }
