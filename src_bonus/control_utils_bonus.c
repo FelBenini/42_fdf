@@ -67,9 +67,9 @@ int	rotate(int keycode, void *params)
 	print_matrix(env);
 	return (0);
 }
-
-int	handle_numpad(int keycode, t_environment *env)
-{
-
-	return (0);
-}
+//
+// int	handle_numpad(int keycode, t_environment *env)
+// {
+//
+// 	return (0);
+// }

@@ -14,12 +14,12 @@
 
 void	handle_color_change(int key, t_environment *env)
 {
-	env->is_color_terrain = 0;
+	if (key == 48 || key == 50)
+		env->is_color_terrain = 0;
 	if (key == 48)
-	{
 		env->colors[0] = 0x606060;
+	if (key == 48)
 		env->colors[1] = 0xeaeaea;
-	}
 	if (key == 49)
 	{
 		env->colors[0] = 0x51b1fc;
