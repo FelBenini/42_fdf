@@ -70,6 +70,12 @@ void	print_menu(t_environment *env)
 	put_str(188, 1672, 0xFFFFFF, "_______________COLORS________________");
 	put_str(212, 1678, 0xFFFFFF, "0. DEFAULT");
 	put_str(232, 1678, 0xFFFFFF, "1. TERRAIN");
-	put_str(300, 1672, 0xFFFFFF, "_______________CONTROLS________________");
+	put_str(212, 1798, 0xFFFFFF, "2. VOID");
+	put_str(232, 1798, 0xFFFFFF, "3. LAND");
+	put_str(300, 1672, 0xFFFFFF, "______________CONTROLS_______________");
+	put_str(332, 1672, 0xFFFFFF, "ARROW KEYS:      ROTATE");
+	put_str(362, 1672, 0xFFFFFF, "WASD:            MOVE MODEL");
+	put_str(392, 1672, 0xFFFFFF, "V AND B KEYS:    APPLY WAVY EFFECT");
+	put_str(422, 1672, 0xFFFFFF, "MOUSE SCROLL:    ZOOM IN AND OUT");
 
 }

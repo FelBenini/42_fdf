@@ -23,7 +23,7 @@ static void	set_background(t_img_data *img)
 		x = 0;
 		while (x <= img->width)
 		{
-			draw_pixel(img, x, y, 0x272727);
+			draw_pixel(img, x, y, 0x09090b);
 			x++;
 		}
 		y++;

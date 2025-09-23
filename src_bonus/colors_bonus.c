@@ -14,6 +14,7 @@
 
 void	handle_color_change(int key, t_environment *env)
 {
+	ft_printf("%d", key);
 	if (key == 48)
 	{
 		env->colors[0] = 0x606060;
@@ -25,6 +26,19 @@ void	handle_color_change(int key, t_environment *env)
 		env->colors[0] = 0x51b1fc;
 		env->colors[1] = 0xb9670c;
 		env->colors[2] = 0xffa85a;
+		env->is_color_terrain = 1;
+	}
+	if (key == 50)
+	{
+		env->colors[0] = 0x09090b;
+		env->colors[1] = 0xeaeaea;
+		env->is_color_terrain = 0;
+	}
+	if (key == 51)
+	{
+		env->colors[0] = 0x17a7df;
+		env->colors[1] = 0xafd46c;
+		env->colors[2] = 0xf3c385;
 		env->is_color_terrain = 1;
 	}
 }
