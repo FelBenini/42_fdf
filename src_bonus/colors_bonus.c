@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   colors_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:05:33 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/06 20:25:19 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/23 14:53:43 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 void	handle_color_change(int key, t_environment *env)
 {
-	ft_printf("%d", key);
+	env->is_color_terrain = 0;
 	if (key == 48)
 	{
 		env->colors[0] = 0x606060;
 		env->colors[1] = 0xeaeaea;
-		env->is_color_terrain = 0;
 	}
 	if (key == 49)
 	{
@@ -32,7 +31,6 @@ void	handle_color_change(int key, t_environment *env)
 	{
 		env->colors[0] = 0x09090b;
 		env->colors[1] = 0xeaeaea;
-		env->is_color_terrain = 0;
 	}
 	if (key == 51)
 	{

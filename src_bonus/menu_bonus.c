@@ -77,5 +77,5 @@ void	print_menu(t_environment *env)
 	put_str(362, 1672, 0xFFFFFF, "WASD:            MOVE MODEL");
 	put_str(392, 1672, 0xFFFFFF, "V AND B KEYS:    APPLY WAVY EFFECT");
 	put_str(422, 1672, 0xFFFFFF, "MOUSE SCROLL:    ZOOM IN AND OUT");
-
+	put_str(452, 1672, 0xFFFFFF, "[ AND ] KEYS:    MODIFY HEIGHT");
 }

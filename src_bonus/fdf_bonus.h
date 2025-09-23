@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:51:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/18 19:02:15 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/23 14:44:02 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ void			print_matrix(t_environment *env);
 
 int				rotate(int keycode, void *params);
 void			change_scale(int value, t_environment *env);
+void			translate(int keycode, t_environment *env);
 
 int				mouse_press(int key, int x, int y, void *param);
 int				mouse_drop(int key, int x, int y, void *param);

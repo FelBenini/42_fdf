@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   projection.c                                       :+:      :+:    :+:   */
+/*   projection_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:00:59 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/06 20:17:56 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/09/23 14:56:10 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ static void	rotate_z_axis(double *x, double *y, double z_cos, double z_sin)
 	*y = temp_x * z_sin + temp_y * z_cos;
 }
 
-void	bend_axis(double x, double y, double *z, t_environment *env)
+static void	bend_axis(double x, double y, double *z, t_environment *env)
 {
-	double factor;
-	double curve_factor;
+	double	factor;
+	double	curve_factor;
 
 	factor = x + y;
 	factor *= 0.1;
