@@ -35,7 +35,7 @@ void	handle_color_change(int key, t_environment *env)
 	if (key == 51)
 	{
 		env->colors[0] = 0x17a7df;
-		env->colors[1] = 0xafd46c;
+		env->colors[1] = 0x7c9c3c;
 		env->colors[2] = 0xf3c385;
 		env->is_color_terrain = 1;
 	}

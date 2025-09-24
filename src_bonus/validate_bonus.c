@@ -77,11 +77,6 @@ static int	is_valid(int fd, t_list **head)
 	i = 1;
 	while (line)
 	{
-		if (count_elemnum(line) != initial_line && returned_value)
-		{
-			ft_printf("❌ Invalid format: Map must be a rectangle.\n");
-			returned_value = 0;
-		}
 		ft_lstadd_back(head, ft_lstnew(line));
 		if (!check_for_elems(line, i) && returned_value)
 			returned_value = 0;
