@@ -61,6 +61,20 @@ static void	put_banner(void)
 	put_str(start + 120, r, color, "(___)      `.__,'   (___)     ");
 }
 
+static void	print_numpad()
+{
+	put_str(552, 1672, 0xFFFFFFF, "0 NUMPAD:       RESET WAVY EFFECT");
+	put_str(572, 1672, 0xFFFFFFF, "1 NUMPAD:       VIEWING FROM Y ANGLE");
+	put_str(592, 1672, 0xFFFFFFF, "2 NUMPAD:       BETWEEN Y AND X ANGLE");
+	put_str(612, 1672, 0xFFFFFFF, "3 NUMPAD:       VIEWING FROM X ANGLE");
+	put_str(632, 1672, 0xFFFFFFF, "4 NUMPAD:       BETWEEN TOP AND Y ANGLE");
+	put_str(652, 1672, 0xFFFFFFF, "5 NUMPAD:       ISOMETRIC PROJECTION");
+	put_str(672, 1672, 0xFFFFFFF, "6 NUMPAD:       SIDELINES DIAGONAL");
+	put_str(692, 1672, 0xFFFFFFF, "7 NUMPAD:       PARALLEL PROJECTION");
+	put_str(712, 1672, 0xFFFFFFF, "8 NUMPAD:       BETWEEN PARALLEL AND ISO");
+	put_str(732, 1672, 0xFFFFFFF, "9 NUMPAD:       PARALLEL FROM THE SIDE");
+}
+
 void	print_menu(t_environment *env)
 {
 	fill_color(&env->menu);
@@ -78,4 +92,6 @@ void	print_menu(t_environment *env)
 	put_str(392, 1672, 0xFFFFFF, "V AND B KEYS:    APPLY WAVY EFFECT");
 	put_str(422, 1672, 0xFFFFFF, "MOUSE SCROLL:    ZOOM IN AND OUT");
 	put_str(452, 1672, 0xFFFFFF, "[ AND ] KEYS:    MODIFY HEIGHT");
+	put_str(522, 1672, 0xFFFFFF, "___________NUMPAD_CONTROLS___________");
+	print_numpad();
 }

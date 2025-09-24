@@ -24,7 +24,6 @@ int	close_window(void *params)
 
 static void	reset_perspective(t_environment *env, double x_angle, double y_angle)
 {
-	env->bending_factor = 0;
 	env->camera.offset_x = 0;
 	env->camera.offset_y = 0;
 	env->camera.y_rotation = y_angle;
@@ -33,6 +32,8 @@ static void	reset_perspective(t_environment *env, double x_angle, double y_angle
 
 static void	handle_numpad(int keycode, t_environment *env)
 {
+	if (keycode == 65438)
+		env->bending_factor = 0;
 	if (keycode == 65429)
 		reset_perspective(env, 0, 0);
 	if (keycode == 65430)
