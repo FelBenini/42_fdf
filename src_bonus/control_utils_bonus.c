@@ -38,9 +38,10 @@ void	change_scale(int value, t_environment *env)
 			env->scale += 0.1;
 		env->scale *= 1.1;
 	}
+	print_matrix(env);
 }
 
-static void	update_cos_sin(t_environment *env)
+void	update_cos_sin(t_environment *env)
 {
 	env->camera.x_cos = cos(env->camera.x_rotation);
 	env->camera.x_sin = sin(env->camera.x_rotation);

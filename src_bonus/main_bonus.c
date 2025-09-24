@@ -69,7 +69,6 @@ void	print_matrix(t_environment *env)
 		i++;
 	}
 	mlx_put_image_to_window(env->mlx.mlx, env->mlx.win, env->img.img, 0, 0);
-	print_menu(env);
 }
 
 int	main(int argc, char *argv[])
@@ -84,12 +83,14 @@ int	main(int argc, char *argv[])
 		return (1);
 	env = init_environment(argv[1], file_content);
 	print_matrix(env);
+	print_menu(env);
 	mlx_mouse_get_pos(env->mlx.mlx, env->mlx.win,
 		&env->keys.last_x, &env->keys.last_y);
 	mlx_hook(env->mlx.win, 17, 0, close_window, &env->mlx);
 	mlx_hook(env->mlx.win, 2, 1L << 0, handle_keymaps, env);
 	mlx_hook(env->mlx.win, 4, 1L << 2, mouse_press, env);
 	mlx_hook(env->mlx.win, 5, 1L << 3, mouse_drop, env);
+	mlx_hook(env->mlx.win, 6, 1L << 6, mouse_move, env);
 	mlx_loop(env->mlx.mlx);
 	clean_env(env);
 	return (0);

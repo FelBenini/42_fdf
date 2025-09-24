@@ -101,7 +101,9 @@ static void	init_structs(t_environment *env, t_list *content)
 	env->camera.offset_y = 0;
 	env->keys.last_x = 0;
 	env->keys.last_y = 0;
-	env->img.width = 1920;
+	env->keys.scroll_pressed = 0;
+	env->keys.right_pressed = 0;
+	env->img.width = 1660;
 	env->img.height = 1080;
 	env->menu.height = 1080;
 	env->menu.width = 280;
@@ -117,7 +119,7 @@ t_environment	*init_environment(char *filename, t_list *content)
 	env = *get_env();
 	init_structs(env, content);
 	title = ft_strjoin("FDF - ", filename);
-	env->mlx.win = mlx_new_window(env->mlx.mlx, env->img.width,
+	env->mlx.win = mlx_new_window(env->mlx.mlx, env->img.width + env->menu.width,
 			env->img.height, title);
 	env->img.img = mlx_new_image(env->mlx.mlx, env->img.width, env->img.height);
 	env->img.addr = mlx_get_data_addr(env->img.img, &env->img.bits_per_pixel,

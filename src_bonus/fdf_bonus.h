@@ -84,6 +84,7 @@ typedef struct s_keys
 	int	scroll_pressed;
 	int	last_x;
 	int	last_y;
+	int	right_pressed;
 }	t_keys;
 
 typedef struct s_environment
@@ -148,12 +149,14 @@ t_list			*validate_input(char *filename);
 
 void			print_matrix(t_environment *env);
 
+void			update_cos_sin(t_environment *env);
 int				rotate(int keycode, void *params);
 void			change_scale(int value, t_environment *env);
 void			translate(int keycode, t_environment *env);
 
 int				mouse_press(int key, int x, int y, void *param);
 int				mouse_drop(int key, int x, int y, void *param);
+int				mouse_move(int x, int y, void *param);
 
 void			print_menu(t_environment *env);
 

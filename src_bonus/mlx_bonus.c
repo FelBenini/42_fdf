@@ -66,7 +66,6 @@ int	handle_keymaps(int keycode, void *params)
 	}
 	translate(keycode, env);
 	handle_color_change(keycode, env);
-	ft_printf("%d", keycode);
 	if (keycode == 98)
 		env->bending_factor += 0.1;
 	if (keycode == 118)
