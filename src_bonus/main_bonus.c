@@ -30,29 +30,35 @@ static void	set_background(t_img_data *img)
 	}
 }
 
-static void	create_lines(t_3dpoint **matrix, t_img_data *img_data,
+static void	create_lines(t_3dpoint ***matrix, t_img_data *img_data,
 						int i)
 {
 	t_2dpoint	point;
 	t_2dpoint	next_point;
+	int			j;
 
-	point = isometric_projection(matrix[i]);
-	if (matrix[i]->next)
+	j = 0;
+	while (matrix[i][j])
 	{
-		next_point = isometric_projection(matrix[i]->next);
-		draw_line(img_data, point, next_point, 0);
-	}
-	if (matrix[i]->below)
-	{
-		next_point = isometric_projection(matrix[i]->below);
-		draw_line(img_data, point, next_point, 0);
+		point = isometric_projection(matrix[i][j]);
+		if (matrix[i][j + 1])
+		{
+			next_point = isometric_projection(matrix[i][j + 1]);
+			draw_line(img_data, point, next_point, 0);
+		}
+		if (matrix[i + 1] && matrix[i + 1][j])
+		{
+			next_point = isometric_projection(matrix[i + 1][j]);
+			draw_line(img_data, point, next_point, 0);
+		}
+		j++;
 	}
 }
 
 void	print_matrix(t_environment *env)
 {
 	int			i;
-	t_3dpoint	**matrix;
+	t_3dpoint	***matrix;
 
 	i = 0;
 	matrix = env->map;
@@ -69,12 +75,14 @@ void	print_matrix(t_environment *env)
 int	main(int argc, char *argv[])
 {
 	t_environment	*env;
+	t_list			*file_content;
 
 	if (argc != 2)
 		return (ft_printf("Please, pass a map as an input"), 1);
-	if (!validate_input(argv[1]))
+	file_content = validate_input(argv[1]);
+	if (!file_content)
 		return (1);
-	env = init_environment(argv[1]);
+	env = init_environment(argv[1], file_content);
 	print_matrix(env);
 	mlx_mouse_get_pos(env->mlx.mlx, env->mlx.win,
 		&env->keys.last_x, &env->keys.last_y);

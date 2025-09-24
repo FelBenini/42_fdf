@@ -54,17 +54,15 @@ static int	check_for_elems(char *line, int line_num)
 		if (!check_elem(splitted[i], line_num, i + 1))
 		{
 			clear_splitted(splitted);
-			free(line);
 			return (0);
 		}
 		i++;
 	}
-	free(line);
 	clear_splitted(splitted);
 	return (1);
 }
 
-static int	is_valid(int fd)
+static int	is_valid(int fd, t_list **head)
 {
 	int		initial_line;
 	char	*line;
@@ -79,12 +77,13 @@ static int	is_valid(int fd)
 	i = 1;
 	while (line)
 	{
-		if (count_elemnum(line) != initial_line)
+		if (count_elemnum(line) != initial_line && returned_value)
 		{
 			ft_printf("❌ Invalid format: Map must be a rectangle.\n");
 			returned_value = 0;
 		}
-		if (!check_for_elems(line, i))
+		ft_lstadd_back(head, ft_lstnew(line));
+		if (!check_for_elems(line, i) && returned_value)
 			returned_value = 0;
 		line = get_next_line(fd);
 		i++;
@@ -92,24 +91,27 @@ static int	is_valid(int fd)
 	return (returned_value);
 }
 
-int	validate_input(char *filename)
+t_list	*validate_input(char *filename)
 {
-	int	fd;
+	int		fd;
+	t_list	*res;
 
 	fd = open(filename, O_RDWR);
 	ft_printf("💾 Validating map file...\n");
+	res = 0;
 	if (fd < 0)
 	{
 		ft_printf("❌ File or directory not found.\n");
 		return (0);
 	}
-	if (!is_valid(fd))
+	if (!is_valid(fd, &res))
 	{
+		ft_lstclear(&res, free);
 		ft_printf("❌ File passed as input is invalid, try another one.\n");
 		close(fd);
 		return (0);
 	}
 	ft_printf("✅ Map is valid.\n");
 	close(fd);
-	return (1);
+	return (res);
 }

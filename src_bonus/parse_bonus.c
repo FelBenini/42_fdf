@@ -24,7 +24,7 @@ static t_3dpoint	***convert_list_to_matrix(t_list *head,
 	res = (t_3dpoint ***)ft_calloc(lst_size + 1, sizeof(t_3dpoint **));
 	if (!res)
 		return (NULL);
-	while (head->next)
+	while (head)
 	{
 		j = 0;
 		content = ft_split((char *)head->content, ' ');
@@ -61,74 +61,12 @@ static	void	get_dimensions(t_3dpoint ***matrix)
 	env->height = y;
 }
 
-static void	fill_array(t_3dpoint ***matrix, int x, int y, t_3dpoint **res)
+t_3dpoint	***parse_map(t_list **head)
 {
-	int	i;
+	t_3dpoint	***res;
 
-	i = 0;
-	while (matrix[y])
-	{
-		x = 0;
-		while (matrix[y][x])
-		{
-			res[i] = matrix[y][x];
-			if (matrix[y][x + 1])
-				res[i]->next = matrix[y][x + 1];
-			if (matrix[y + 1] && matrix[y + 1][x])
-				res[i]->below = matrix[y + 1][x];
-			x++;
-			i++;
-		}
-		free(matrix[y]);
-		y++;
-	}
-	free(matrix);
-}
-
-t_3dpoint	**convert_matrix_to_arr(t_3dpoint ***matrix)
-{
-	t_3dpoint	**res;
-	int			x;
-	int			y;
-	int			total_points;
-
-	total_points = 0;
-	y = 0;
-	while (matrix[y])
-	{
-		x = 0;
-		while (matrix[y][x])
-		{
-			total_points++;
-			x++;
-		}
-		y++;
-	}
-	res = ft_calloc(total_points + 1, sizeof(t_3dpoint *));
-	y = 0;
-	fill_array(matrix, x, y, res);
-	return (res);
-}
-
-t_3dpoint	**parse_map(char *filename)
-{
-	t_list		*head;
-	int			file;
-	char		*line;
-	t_3dpoint	***matrix;
-	t_3dpoint	**res;
-
-	file = open(filename, O_RDWR);
-	line = get_next_line(file);
-	head = ft_lstnew(line);
-	while (line)
-	{
-		line = get_next_line(file);
-		ft_lstadd_back(&head, ft_lstnew(line));
-	}
-	matrix = convert_list_to_matrix(head, ft_lstsize(head));
-	get_dimensions(matrix);
-	ft_lstclear(&head, free);
-	res = convert_matrix_to_arr(matrix);
+	res = convert_list_to_matrix(*head, ft_lstsize(*head));
+	get_dimensions(res);
+	ft_lstclear(head, free);
 	return (res);
 }

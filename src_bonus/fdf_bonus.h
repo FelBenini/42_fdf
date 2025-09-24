@@ -41,8 +41,6 @@ typedef struct s_3dpoint
 	int					z;
 	int					color;
 	int					has_color;
-	struct s_3dpoint	*next;
-	struct s_3dpoint	*below;
 }	t_3dpoint;
 
 typedef struct s_2dpoint
@@ -94,7 +92,7 @@ typedef struct s_environment
 	t_img_data		menu;
 	t_mlx_args		mlx;
 	t_camera		camera;
-	t_3dpoint		**map;
+	t_3dpoint		***map;
 	t_keys			keys;
 	int				width;
 	int				height;
@@ -135,10 +133,10 @@ int				close_window(void *params);
 int				handle_keymaps(int keycode, void *params);
 void			handle_color_change(int key, t_environment *env);
 
-t_3dpoint		**parse_map(char *filename);
+t_3dpoint		***parse_map(t_list **head);
 
 t_environment	**get_env(void);
-t_environment	*init_environment(char *filename);
+t_environment	*init_environment(char *filename, t_list *content);
 void			get_highest_projections(t_3dpoint *point_3d);
 
 void			clean_env(t_environment *env);
@@ -146,7 +144,7 @@ void			clear_splitted(char **splitted);
 
 unsigned int	get_color(int height);
 
-int				validate_input(char *filename);
+t_list			*validate_input(char *filename);
 
 void			print_matrix(t_environment *env);
 
