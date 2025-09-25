@@ -25,9 +25,11 @@ t_2dpoint	*new_2dpoint(int x, int y, int z)
 
 t_3dpoint	*new_3dpoint(int x, int y, int z, char *color)
 {
-	t_3dpoint	*res;
-	static int	count;
+	t_3dpoint		*res;
+	static int		count;
+	t_environment	*env;
 
+	env = *get_env();
 	res = (t_3dpoint *)malloc(sizeof(t_3dpoint));
 	res->x = x;
 	res->y = y;
@@ -45,6 +47,7 @@ t_3dpoint	*new_3dpoint(int x, int y, int z, char *color)
 	get_highest_projections(res);
 	count++;
 	ft_printf("\r⏏️  %d Map points parsed.", count);
+	env->total_map_points = count;
 	return (res);
 }
 
@@ -57,7 +60,7 @@ void	normalize_map(t_environment *env)
 	while (env->map[i])
 	{
 		j = 0;
-		while(env->map[i][j])
+		while (env->map[i][j])
 		{
 			env->map[i][j]->y -= env->height / 2;
 			env->map[i][j]->x -= env->width / 2;

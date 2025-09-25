@@ -109,6 +109,7 @@ typedef struct s_environment
 	double			z_factor;
 	unsigned int	colors[3];
 	double			bending_factor;
+	int				total_map_points;
 	int				is_color_terrain;
 }	t_environment;
 

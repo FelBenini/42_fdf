@@ -22,7 +22,8 @@ int	close_window(void *params)
 	return (0);
 }
 
-static void	reset_perspective(t_environment *env, double x_angle, double y_angle)
+static void	reset_perspective(t_environment *env,
+							double x_angle, double y_angle)
 {
 	env->camera.offset_x = 0;
 	env->camera.offset_y = 0;

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
+#include <sys/time.h>
 
 static void	set_background(t_img_data *img)
 {
@@ -57,18 +58,29 @@ static void	create_lines(t_3dpoint ***matrix, t_img_data *img_data,
 
 void	print_matrix(t_environment *env)
 {
-	int			i;
-	t_3dpoint	***matrix;
+	static struct timeval	last_call_time = {0, 0};
+	struct timeval			current_time;
+	long long				time_diff;
+	t_3dpoint				***matrix;
+	int						i;
 
-	i = 0;
-	matrix = env->map;
-	set_background(&env->img);
-	while (matrix[i])
+	gettimeofday(&current_time, NULL);
+	time_diff = (current_time.tv_sec - last_call_time.tv_sec)
+		* 1000000 + (current_time.tv_usec - last_call_time.tv_usec);
+	if (time_diff >= env->total_map_points / 3)
 	{
-		create_lines(matrix, &env->img, i);
-		i++;
+		i = 0;
+		matrix = env->map;
+		set_background(&env->img);
+		while (matrix[i])
+		{
+			create_lines(matrix, &env->img, i);
+			i++;
+		}
+		mlx_put_image_to_window(env->mlx.mlx, env->mlx.win,
+			env->img.img, 0, 0);
+		last_call_time = current_time;
 	}
-	mlx_put_image_to_window(env->mlx.mlx, env->mlx.win, env->img.img, 0, 0);
 }
 
 int	main(int argc, char *argv[])

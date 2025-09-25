@@ -61,7 +61,7 @@ static void	put_banner(void)
 	put_str(start + 120, r, color, "(___)      `.__,'   (___)     ");
 }
 
-static void	print_numpad()
+static void	print_numpad(void)
 {
 	put_str(552, 1672, 0xFFFFFFF, "0 NUMPAD:       RESET WAVY EFFECT");
 	put_str(572, 1672, 0xFFFFFFF, "1 NUMPAD:       VIEWING FROM Y ANGLE");
