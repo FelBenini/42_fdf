@@ -49,6 +49,7 @@ static	void	get_dimensions(t_3dpoint ***matrix)
 	t_environment	*env;
 
 	y = 0;
+	x = 0;
 	env = *get_env();
 	while (matrix[y])
 	{

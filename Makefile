@@ -30,6 +30,8 @@ LIBFT_HDR = ./libft/libft.h
 
 HDR = ./src/fdf.h
 
+HDR_BONUS = ./src_bonus/fdf_bonus.h
+
 SRCS = ./src/main.c \
 	   ./src/draw.c \
 	   ./src/point.c \
@@ -40,8 +42,6 @@ SRCS = ./src/main.c \
 	   ./src/cleaners.c \
 	   ./src/colors.c \
 	   ./src/validate.c
-
-HDR_BONUS = ./src_bonus/fdf_bonus.h
 
 SRCS_BONUS = ./src_bonus/main_bonus.c \
 	   ./src_bonus/draw_bonus.c \
@@ -61,14 +61,14 @@ OBJS = $(SRCS:.c=.o)
 
 BONUS_OBJS = $(SRCS_BONUS:.c=.o)
 
+$(NAME): $(OBJS) $(MINILIB) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L$(MINILIB_DIR) -lmlx_Linux -L$(LIBFT_DIR) -lXext -lX11 -lm -lz -lft
+
 $(OBJS): %.o: %.c $(HDR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJS_BONUS): %.o: %.c $(HDR_BONUS)
 	$(CC) $(CFLAGS) -c $< -o $@
-
-$(NAME): $(OBJS) $(MINILIB) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L$(MINILIB_DIR) -lmlx_Linux -L$(LIBFT_DIR) -lXext -lX11 -lm -lz -lft
 
 $(MINILIB):
 	@$(MAKE) -C $(MINILIB_DIR)
@@ -95,4 +95,4 @@ re: fclean $(NAME)
 
 re-bonus: fclean bonus
 
-.PHONY: all fclean clean re bonus re-bonus
+.PHONY: all fclean clean re bonus

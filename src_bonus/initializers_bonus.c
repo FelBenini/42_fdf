@@ -119,7 +119,7 @@ t_environment	*init_environment(char *filename, t_list *content)
 	env = *get_env();
 	init_structs(env, content);
 	title = ft_strjoin("FDF - ", filename);
-	env->mlx.win = mlx_new_window(env->mlx.mlx, env->img.width + env->menu.width,
+	env->mlx.win = mlx_new_window(env->mlx.mlx, 1920,
 			env->img.height, title);
 	env->img.img = mlx_new_image(env->mlx.mlx, env->img.width, env->img.height);
 	env->img.addr = mlx_get_data_addr(env->img.img, &env->img.bits_per_pixel,
