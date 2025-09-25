@@ -67,7 +67,7 @@ void	print_matrix(t_environment *env)
 	gettimeofday(&current_time, NULL);
 	time_diff = (current_time.tv_sec - last_call_time.tv_sec)
 		* 1000000 + (current_time.tv_usec - last_call_time.tv_usec);
-	if (time_diff >= env->total_map_points / 3)
+	if (time_diff >= env->total_map_points / 2.5)
 	{
 		i = 0;
 		matrix = env->map;
