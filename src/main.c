@@ -15,7 +15,7 @@
 static int	count_line_size(t_3dpoint **line)
 {
 	int	i;
-	
+
 	i = 0;
 	while (line[i])
 		i++;
