@@ -79,11 +79,6 @@ static int	is_valid(int fd)
 	i = 1;
 	while (line)
 	{
-		if (count_elemnum(line) != initial_line)
-		{
-			ft_printf("❌ Invalid format: Map must be a rectangle.\n");
-			returned_value = 0;
-		}
 		if (!check_for_elems(line, i))
 			returned_value = 0;
 		line = get_next_line(fd);

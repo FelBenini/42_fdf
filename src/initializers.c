@@ -42,9 +42,9 @@ void	get_highest_projections(t_3dpoint *point_3d)
 
 	env = *get_env();
 	point_2d = isometric_projection(point_3d);
-	if (env->highest_x > point_2d->x)
+	if (env->highest_x < point_2d->x)
 		env->highest_x = point_2d->x;
-	if (env->lowest_x < point_2d->x)
+	if (env->lowest_x > point_2d->x)
 		env->lowest_x = point_2d->x;
 	if (env->highest_y > point_2d->y)
 		env->highest_y = point_2d->y;
@@ -100,7 +100,7 @@ t_environment	*init_environment(char *filename)
 		env->scale = (1920 * 0.80) / (env->highest_x - env->lowest_x);
 	else
 		env->scale = (1580 * 0.85) / (env->highest_y - env->lowest_y);
-	env->offset_x = (2620 - ((env->highest_x) * env->scale)) / 2;
+	env->offset_x = (1320 - ((env->highest_x) * env->scale)) / 2;
 	env->offset_y = (1490 - ((env->highest_y) * env->scale)) / 2;
 	free(title);
 	return (env);

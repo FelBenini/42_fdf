@@ -94,4 +94,8 @@ void	print_menu(t_environment *env)
 	put_str(452, 1672, 0xFFFFFF, "[ AND ] KEYS:    MODIFY HEIGHT");
 	put_str(522, 1672, 0xFFFFFF, "___________NUMPAD_CONTROLS___________");
 	print_numpad();
+	put_str(772, 1672, 0xFFFFFF, "___________MOUSE__CONTROLS___________");
+	put_str(812, 1672, 0xFFFFFF, "- HOLD SCROLL AND MOVE TO ROTATE MODEL");
+	put_str(832, 1672, 0xFFFFFF, "- HOLD RIGHT CLICK AND MOVE THE MOUSE TO");
+	put_str(848, 1672, 0xFFFFFF, "TO TRANSLATE THE MODEL");
 }
