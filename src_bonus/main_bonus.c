@@ -100,14 +100,10 @@ void	print_matrix(t_environment *env)
 int	main(int argc, char *argv[])
 {
 	t_environment	*env;
-	t_list			*file_content;
 
 	if (argc != 2)
 		return (ft_printf("Please, pass a map as an input"), 1);
-	file_content = validate_input(argv[1]);
-	if (!file_content)
-		return (1);
-	env = init_environment(argv[1], file_content);
+	env = init_environment(argv[1]);
 	print_matrix(env);
 	print_menu(env);
 	mlx_mouse_get_pos(env->mlx.mlx, env->mlx.win,
@@ -117,6 +113,7 @@ int	main(int argc, char *argv[])
 	mlx_hook(env->mlx.win, 4, 1L << 2, mouse_press, env);
 	mlx_hook(env->mlx.win, 5, 1L << 3, mouse_drop, env);
 	mlx_hook(env->mlx.win, 6, 1L << 6, mouse_move, env);
+	mlx_loop_hook(env->mlx.mlx, loop_through_frames, env);
 	mlx_loop(env->mlx.mlx);
 	clean_env(env);
 	return (0);

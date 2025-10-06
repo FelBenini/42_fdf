@@ -46,28 +46,42 @@ t_3dpoint	*new_3dpoint(int x, int y, int z, char *color)
 		res->has_color = 0;
 	get_highest_projections(res);
 	count++;
-	ft_printf("\r⏏️  %d Map points parsed.", count);
 	env->total_map_points = count;
 	return (res);
 }
 
-void	normalize_map(t_environment *env)
+void	normalize_map(t_3dpoint ***map)
 {
-	int	i;
-	int	j;
+	int				i;
+	int				j;
+	t_environment	*env;
 
 	i = 0;
-	while (env->map[i])
+	env = *get_env();
+	while (map[i])
 	{
 		j = 0;
-		while (env->map[i][j])
+		while (map[i][j])
 		{
-			env->map[i][j]->y -= env->height / 2;
-			env->map[i][j]->x -= env->width / 2;
-			env->map[i][j]->y *= -1;
-			env->map[i][j]->x *= -1;
+			map[i][j]->y -= env->height / 2;
+			map[i][j]->x -= env->width / 2;
+			map[i][j]->y *= -1;
+			map[i][j]->x *= -1;
 			j++;
 		}
 		i++;
 	}
+}
+
+void	normalize_frames(t_environment *env)
+{
+	t_list	*current;
+
+	current = env->frames;
+	while (current)
+	{
+		normalize_map(current->content);
+		current = current->next;
+	}
+	env->total_map_points /= ft_lstsize(env->frames);
 }

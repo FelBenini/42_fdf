@@ -93,6 +93,7 @@ typedef struct s_environment
 	t_img_data		menu;
 	t_mlx_args		mlx;
 	t_camera		camera;
+	t_list			*frames;
 	t_3dpoint		***map;
 	t_keys			keys;
 	int				width;
@@ -129,7 +130,7 @@ void			draw_line(t_img_data *data, t_2dpoint from,
 t_2dpoint		*new_2dpoint(int x, int y, int z);
 t_3dpoint		*new_3dpoint(int x, int y, int z, char *color);
 t_2dpoint		isometric_projection(t_3dpoint *point3d);
-void			normalize_map(t_environment *env);
+void			normalize_frames(t_environment *env);
 
 int				close_window(void *params);
 int				handle_keymaps(int keycode, void *params);
@@ -138,15 +139,16 @@ void			handle_color_change(int key, t_environment *env);
 t_3dpoint		***parse_map(t_list **head);
 
 t_environment	**get_env(void);
-t_environment	*init_environment(char *filename, t_list *content);
+t_environment	*init_environment(char *filename);
 void			get_highest_projections(t_3dpoint *point_3d);
 
 void			clean_env(t_environment *env);
 void			clear_splitted(char **splitted);
+void			clear_matrix(void *ptr);
 
 unsigned int	get_color(int height);
 
-t_list			*validate_input(char *filename);
+t_list			*validate_input(int fd);
 
 void			print_matrix(t_environment *env);
 
@@ -160,5 +162,8 @@ int				mouse_drop(int key, int x, int y, void *param);
 int				mouse_move(int x, int y, void *param);
 
 void			print_menu(t_environment *env);
+
+t_list			*parse_frames(char *directory_name);
+int				loop_through_frames(t_environment *env);
 
 #endif

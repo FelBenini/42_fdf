@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate.c                                         :+:      :+:    :+:   */
+/*   validate_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 14:58:13 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/07 19:14:38 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/10/02 17:12:36 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,27 +86,17 @@ static int	is_valid(int fd, t_list **head)
 	return (returned_value);
 }
 
-t_list	*validate_input(char *filename)
+t_list	*validate_input(int fd)
 {
-	int		fd;
 	t_list	*res;
 
-	fd = open(filename, O_RDWR);
-	ft_printf("💾 Validating map file...\n");
 	res = 0;
-	if (fd < 0)
-	{
-		ft_printf("❌ File or directory not found.\n");
-		return (0);
-	}
 	if (!is_valid(fd, &res))
 	{
 		ft_lstclear(&res, free);
-		ft_printf("❌ File passed as input is invalid, try another one.\n");
 		close(fd);
 		return (0);
 	}
-	ft_printf("✅ Map is valid.\n");
 	close(fd);
 	return (res);
 }

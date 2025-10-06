@@ -12,12 +12,16 @@
 
 #include "fdf_bonus.h"
 
-static void	clear_matrix(t_3dpoint ***matrix)
+void	clear_matrix(void *ptr)
 {
-	int	i;
-	int	j;
+	int			i;
+	int			j;
+	t_3dpoint	***matrix;
 
 	i = 0;
+	matrix = (t_3dpoint ***)ptr;
+	if (!matrix)
+		return ;
 	while (matrix[i])
 	{
 		j = 0;
@@ -51,7 +55,7 @@ void	clean_env(t_environment *env)
 	mlx_destroy_image(env->mlx.mlx, env->menu.img);
 	mlx_destroy_window(env->mlx.mlx, env->mlx.win);
 	mlx_destroy_display(env->mlx.mlx);
-	clear_matrix(env->map);
+	ft_lstclear(&env->frames, clear_matrix);
 	free(env->mlx.mlx);
 	free(env);
 }

@@ -27,7 +27,7 @@ static void	get_highest_point(t_3dpoint ***map, t_environment **environment)
 		{
 			if (map[i][j]->z > env->highest_z)
 				env->highest_z = map[i][j]->z;
-			if (map[i][j]-> z < env->lowest_z)
+			if (map[i][j]->z < env->lowest_z)
 				env->lowest_z = map[i][j]->z;
 			j++;
 		}
@@ -86,7 +86,7 @@ t_environment	**get_env(void)
 	return (&env);
 }
 
-static void	init_structs(t_environment *env, t_list *content)
+static void	init_structs(t_environment *env, char *filename)
 {
 	env->camera.x_cos = cos(0.0);
 	env->camera.x_sin = sin(0.0);
@@ -107,17 +107,23 @@ static void	init_structs(t_environment *env, t_list *content)
 	env->img.height = 1080;
 	env->menu.height = 1080;
 	env->menu.width = 280;
-	env->map = parse_map(&content);
+	env->frames = parse_frames(filename);
+	if (!env->frames)
+	{
+		free(env);
+		exit(1);
+	}
+	env->map = env->frames->content;
 	env->mlx.mlx = mlx_init();
 }
 
-t_environment	*init_environment(char *filename, t_list *content)
+t_environment	*init_environment(char *filename)
 {
 	t_environment	*env;
 	char			*title;
 
 	env = *get_env();
-	init_structs(env, content);
+	init_structs(env, filename);
 	title = ft_strjoin("FDF - ", filename);
 	env->mlx.win = mlx_new_window(env->mlx.mlx, 1920,
 			env->img.height, title);
@@ -129,7 +135,7 @@ t_environment	*init_environment(char *filename, t_list *content)
 	env->menu.addr = mlx_get_data_addr(env->menu.img, &env->menu.bits_per_pixel,
 			&env->menu.line_length, &env->menu.endian);
 	get_highest_point(env->map, &env);
-	normalize_map(env);
+	normalize_frames(env);
 	if (env->highest_x - env->lowest_x < env->highest_y - env->lowest_y)
 		env->scale = (1920 * 0.80) / (env->highest_x - env->lowest_x);
 	else

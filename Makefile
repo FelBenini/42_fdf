@@ -55,7 +55,8 @@ SRCS_BONUS = ./src_bonus/main_bonus.c \
 	   ./src_bonus/validate_bonus.c \
 	   ./src_bonus/mouse_control_bonus.c \
 	   ./src_bonus/menu_bonus.c \
-	   ./src_bonus/control_utils_bonus.c
+	   ./src_bonus/control_utils_bonus.c \
+	   ./src_bonus/frames.c
 
 OBJS = $(SRCS:.c=.o)
 
