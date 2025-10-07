@@ -143,7 +143,7 @@ t_environment	*init_environment(char *filename);
 void			get_highest_projections(t_3dpoint *point_3d);
 
 void			clean_env(t_environment *env);
-void			clear_splitted(char **splitted);
+void			clear_splitted(void *splitted);
 void			clear_matrix(void *ptr);
 
 unsigned int	get_color(int height);

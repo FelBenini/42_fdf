@@ -36,10 +36,12 @@ void	clear_matrix(void *ptr)
 	free(matrix);
 }
 
-void	clear_splitted(char **splitted)
+void	clear_splitted(void *value)
 {
-	int	i;
+	int		i;
+	char	**splitted;
 
+	splitted = (char **)value;
 	i = 0;
 	while (splitted[i])
 	{

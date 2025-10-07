@@ -42,7 +42,7 @@ static int	check_elem(char *elem, int line_num, int column_num)
 	return (returned);
 }
 
-static int	check_for_elems(char *line, int line_num)
+static int	check_for_elems(char *line, int line_num, t_list **head)
 {
 	char	**splitted;
 	int		i;
@@ -52,13 +52,11 @@ static int	check_for_elems(char *line, int line_num)
 	while (splitted[i] && splitted[i][0] != '\n')
 	{
 		if (!check_elem(splitted[i], line_num, i + 1))
-		{
-			clear_splitted(splitted);
 			return (0);
-		}
 		i++;
 	}
-	clear_splitted(splitted);
+	ft_lstadd_back(head, ft_lstnew(splitted));
+	free(line);
 	return (1);
 }
 
@@ -77,8 +75,7 @@ static int	is_valid(int fd, t_list **head)
 	i = 1;
 	while (line)
 	{
-		ft_lstadd_back(head, ft_lstnew(line));
-		if (!check_for_elems(line, i) && returned_value)
+		if (!check_for_elems(line, i, head) && returned_value)
 			returned_value = 0;
 		line = get_next_line(fd);
 		i++;
@@ -93,7 +90,7 @@ t_list	*validate_input(int fd)
 	res = 0;
 	if (!is_valid(fd, &res))
 	{
-		ft_lstclear(&res, free);
+		ft_lstclear(&res, clear_splitted);
 		close(fd);
 		return (0);
 	}

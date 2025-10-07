@@ -27,7 +27,7 @@ static t_3dpoint	***convert_list_to_matrix(t_list *head,
 	while (head)
 	{
 		j = 0;
-		content = ft_split((char *)head->content, ' ');
+		content = (char **)head->content;
 		while (content[j])
 			j++;
 		res[i] = (t_3dpoint **)ft_calloc(j + 1, sizeof(t_3dpoint *));
@@ -35,7 +35,6 @@ static t_3dpoint	***convert_list_to_matrix(t_list *head,
 		while (content[j++])
 			res[i][j - 1] = new_3dpoint(j - 1, i, ft_atoi(content[j - 1]),
 					ft_strnstr(content[j - 1], ",0x", 30));
-		clear_splitted(content);
 		head = head->next;
 		i++;
 	}
@@ -68,6 +67,6 @@ t_3dpoint	***parse_map(t_list **head)
 
 	res = convert_list_to_matrix(*head, ft_lstsize(*head));
 	get_dimensions(res);
-	ft_lstclear(head, free);
+	ft_lstclear(head, clear_splitted);
 	return (res);
 }
