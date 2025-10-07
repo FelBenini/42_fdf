@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:51:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/23 14:59:55 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/10/07 16:17:49 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ t_3dpoint		***parse_map(t_list **head);
 t_environment	**get_env(void);
 t_environment	*init_environment(char *filename);
 void			get_highest_projections(t_3dpoint *point_3d);
+void			initialize_camera(t_environment *env);
 
 void			clean_env(t_environment *env);
 void			clear_splitted(void *splitted);

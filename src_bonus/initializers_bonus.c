@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 13:33:51 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/09/23 14:59:36 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/10/07 16:18:08 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ t_environment	**get_env(void)
 	if (env)
 		return (&env);
 	env = malloc(sizeof(t_environment));
+	if (!env)
+		return (NULL);
 	env->highest_x = 0;
 	env->lowest_x = 0;
 	env->highest_y = 0;
@@ -81,24 +83,12 @@ t_environment	**get_env(void)
 	env->z_factor = 0.5;
 	env->is_color_terrain = 0;
 	env->bending_factor = 0;
-	if (!env)
-		return (NULL);
 	return (&env);
 }
 
 static void	init_structs(t_environment *env, char *filename)
 {
-	env->camera.x_cos = cos(0.0);
-	env->camera.x_sin = sin(0.0);
-	env->camera.z_cos = cos(0.0);
-	env->camera.z_sin = sin(0.0);
-	env->camera.y_cos = cos(0.0);
-	env->camera.y_sin = sin(0.0);
-	env->camera.x_rotation = 0.0;
-	env->camera.y_rotation = 0.0;
-	env->camera.z_rotation = 0.0;
-	env->camera.offset_x = 0;
-	env->camera.offset_y = 0;
+	initialize_camera(env);
 	env->keys.last_x = 0;
 	env->keys.last_y = 0;
 	env->keys.scroll_pressed = 0;

@@ -6,7 +6,7 @@
 #    By: fbenini- <your@mail.com>                   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/25 14:39:13 by fbenini-          #+#    #+#              #
-#    Updated: 2025/09/23 14:44:54 by fbenini-         ###   ########.fr        #
+#    Updated: 2025/10/07 16:18:20 by fbenini-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRCS_BONUS = ./src_bonus/main_bonus.c \
 	   ./src_bonus/mlx_bonus.c \
 	   ./src_bonus/projection_bonus.c \
 	   ./src_bonus/initializers_bonus.c \
+	   ./src_bonus/initializers2_bonus.c \
 	   ./src_bonus/cleaners_bonus.c \
 	   ./src_bonus/colors_bonus.c \
 	   ./src_bonus/validate_bonus.c \

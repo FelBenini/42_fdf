@@ -99,7 +99,7 @@ t_list	*parse_frames(char *directory_name)
 	return (head);
 }
 
-int loop_through_frames(t_environment *env)
+int	loop_through_frames(t_environment *env)
 {
 	static t_list			*current_frame = NULL;
 	static struct timeval	last_time = {0, 0};
