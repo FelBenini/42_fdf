@@ -46,7 +46,7 @@ void	get_highest_projections(t_3dpoint *point_3d)
 	t_2dpoint		point_2d;
 
 	env = *get_env();
-	point_2d = isometric_projection(point_3d);
+	point_2d = project_point(point_3d);
 	if (env->highest_x > point_2d.x)
 		env->highest_x = point_2d.x;
 	if (env->lowest_x < point_2d.x)

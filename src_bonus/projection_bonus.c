@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
-#include <stdio.h>
 
 static void	rotate_x_axis(double *y, double *z, double x_cos, double x_sin)
 {
@@ -59,7 +58,7 @@ static void	bend_axis(double x, double y, double *z, t_environment *env)
 	*z += -curve_factor;
 }
 
-t_2dpoint	isometric_projection(t_3dpoint *point3d)
+t_2dpoint	project_point(t_3dpoint *point3d)
 {
 	t_2dpoint		res;
 	t_environment	*env;

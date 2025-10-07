@@ -129,7 +129,7 @@ void			draw_line(t_img_data *data, t_2dpoint from,
 
 t_2dpoint		*new_2dpoint(int x, int y, int z);
 t_3dpoint		*new_3dpoint(int x, int y, int z, char *color);
-t_2dpoint		isometric_projection(t_3dpoint *point3d);
+t_2dpoint		project_point(t_3dpoint *point3d);
 void			normalize_frames(t_environment *env);
 
 int				close_window(void *params);

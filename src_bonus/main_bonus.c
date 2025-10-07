@@ -55,15 +55,15 @@ static void	create_lines(t_3dpoint ***matrix, t_img_data *img_data,
 		next_line_size = count_line_size(matrix[i + 1]);
 	while (matrix[i][j])
 	{
-		point = isometric_projection(matrix[i][j]);
+		point = project_point(matrix[i][j]);
 		if (matrix[i][j + 1])
 		{
-			next_point = isometric_projection(matrix[i][j + 1]);
+			next_point = project_point(matrix[i][j + 1]);
 			draw_line(img_data, point, next_point, 0);
 		}
 		if (matrix[i + 1] && j < next_line_size)
 		{
-			next_point = isometric_projection(matrix[i + 1][j]);
+			next_point = project_point(matrix[i + 1][j]);
 			draw_line(img_data, point, next_point, 0);
 		}
 		j++;
@@ -81,7 +81,7 @@ void	print_matrix(t_environment *env)
 	gettimeofday(&current_time, NULL);
 	time_diff = (current_time.tv_sec - last_call_time.tv_sec)
 		* 1000000 + (current_time.tv_usec - last_call_time.tv_usec);
-	if (time_diff >= env->total_map_points / 6)
+	if (time_diff >= env->total_map_points / 4.8)
 	{
 		i = 0;
 		matrix = env->map;
