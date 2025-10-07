@@ -104,6 +104,7 @@ static void	init_structs(t_environment *env, char *filename)
 		exit(1);
 	}
 	env->map = env->frames->content;
+	get_dimensions(env->map);
 	env->mlx.mlx = mlx_init();
 }
 

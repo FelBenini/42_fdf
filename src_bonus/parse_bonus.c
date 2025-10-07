@@ -41,7 +41,7 @@ static t_3dpoint	***convert_list_to_matrix(t_list *head,
 	return (res);
 }
 
-static	void	get_dimensions(t_3dpoint ***matrix)
+void	get_dimensions(t_3dpoint ***matrix)
 {
 	int				x;
 	int				y;
@@ -66,7 +66,6 @@ t_3dpoint	***parse_map(t_list **head)
 	t_3dpoint	***res;
 
 	res = convert_list_to_matrix(*head, ft_lstsize(*head));
-	get_dimensions(res);
 	ft_lstclear(head, clear_splitted);
 	return (res);
 }

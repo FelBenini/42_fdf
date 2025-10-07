@@ -136,6 +136,7 @@ int				close_window(void *params);
 int				handle_keymaps(int keycode, void *params);
 void			handle_color_change(int key, t_environment *env);
 
+void			get_dimensions(t_3dpoint ***matrix);
 t_3dpoint		***parse_map(t_list **head);
 
 t_environment	**get_env(void);
