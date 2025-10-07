@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 14:58:13 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/10/02 17:12:36 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/10/07 17:11:38 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	count_elemnum(char *line)
 	return (i);
 }
 
-static int	check_elem(char *elem, int line_num, int column_num)
+static int	check_elem(char *elem)
 {
 	char	*after_comma;
 	int		returned;
@@ -36,27 +36,27 @@ static int	check_elem(char *elem, int line_num, int column_num)
 		returned = 0;
 	if (after_comma && ft_strncmp(after_comma, ",0x", 3) != 0)
 		returned = 0;
-	if (!returned)
-		ft_printf("❌ Element at line %d, column %d is invalid.\n",
-			line_num, column_num);
 	return (returned);
 }
 
-static int	check_for_elems(char *line, int line_num, t_list **head)
+static int	check_for_elems(char *line, t_list **head)
 {
 	char	**splitted;
 	int		i;
 
 	splitted = ft_split(line, ' ');
+	free(line);
 	i = 0;
 	while (splitted[i] && splitted[i][0] != '\n')
 	{
-		if (!check_elem(splitted[i], line_num, i + 1))
+		if (!check_elem(splitted[i]))
+		{
+			clear_splitted(splitted);
 			return (0);
+		}
 		i++;
 	}
 	ft_lstadd_back(head, ft_lstnew(splitted));
-	free(line);
 	return (1);
 }
 
@@ -64,7 +64,6 @@ static int	is_valid(int fd, t_list **head)
 {
 	int		initial_line;
 	char	*line;
-	int		i;
 	int		returned_value;
 
 	line = get_next_line(fd);
@@ -72,13 +71,11 @@ static int	is_valid(int fd, t_list **head)
 	initial_line = count_elemnum(line);
 	if (initial_line <= 0)
 		returned_value = 0;
-	i = 1;
 	while (line)
 	{
-		if (!check_for_elems(line, i, head) && returned_value)
+		if (!check_for_elems(line, head) && returned_value)
 			returned_value = 0;
 		line = get_next_line(fd);
-		i++;
 	}
 	return (returned_value);
 }

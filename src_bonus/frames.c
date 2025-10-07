@@ -6,7 +6,7 @@
 /*   By: fbenini- <your@mail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 16:49:24 by fbenini-          #+#    #+#             */
-/*   Updated: 2025/10/02 17:14:14 by fbenini-         ###   ########.fr       */
+/*   Updated: 2025/10/07 17:04:53 by fbenini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,29 +45,29 @@ static t_list	*parse_single_frame(char *directory_name, char *iter)
 
 static t_list	*loop_through_files(char *directory_name)
 {
-	char	*dir_name_ending_slash;
 	int		i;
 	t_list	*frame;
 	t_list	*head;
 
-	dir_name_ending_slash = ft_strjoin(directory_name, "/");
 	i = 0;
-	frame = parse_single_frame(dir_name_ending_slash, ft_itoa(i++));
-	if (!frame && i == 0)
+	frame = parse_single_frame(directory_name, ft_itoa(i++));
+	if (!frame)
 	{
-		ft_lstclear(&head, clear_matrix);
+		free(directory_name);
+		ft_lstclear(&head, NULL);
+		ft_printf("❌ ERROR: File or directory not found.\n");
 		return (NULL);
 	}
 	head = frame;
-	ft_printf("\n");
+	ft_printf("📹 Parsing animated fdf.\n\n");
 	while (frame)
 	{
-		frame = parse_single_frame(dir_name_ending_slash, ft_itoa(i++));
+		frame = parse_single_frame(directory_name, ft_itoa(i++));
 		ft_printf("✅ Parsed %d frames\r", i);
 		ft_lstadd_back(&head, frame);
 	}
 	ft_printf("\n");
-	free(dir_name_ending_slash);
+	free(directory_name);
 	return (head);
 }
 
@@ -81,11 +81,11 @@ t_list	*parse_frames(char *directory_name)
 	file = open(directory_name, O_RDWR);
 	if (file >= 0)
 	{
-		ft_printf("Validanting map file...\n");
+		ft_printf("💾 Parsing Map file...\n\n");
 		file_content = validate_input(file);
 		if (!file_content)
 		{
-			ft_printf("❌ ERROR: Map is Invalid.\n");
+			ft_printf("❌ ERROR: Map is invalid.\n");
 			ft_lstclear(&file_content, free);
 			return (NULL);
 		}
@@ -95,7 +95,7 @@ t_list	*parse_frames(char *directory_name)
 		ft_printf("👍 Map is valid!\n");
 		return (head);
 	}
-	head = loop_through_files(directory_name);
+	head = loop_through_files(ft_strjoin(directory_name, "/"));
 	return (head);
 }
 
