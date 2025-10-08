@@ -17,6 +17,9 @@
 # include "../minilibx/mlx.h"
 # include <math.h>
 
+# define PARALLEL 0
+# define ISOMETRIC 1
+
 typedef struct s_mlx_args
 {
 	void	*win;
@@ -77,6 +80,7 @@ typedef struct s_camera
 	double	z_rotation;
 	int		offset_x;
 	int		offset_y;
+	int		projection;
 }	t_camera;
 
 typedef struct s_keys
@@ -130,6 +134,10 @@ void			draw_line(t_img_data *data, t_2dpoint from,
 t_2dpoint		*new_2dpoint(int x, int y, int z);
 t_3dpoint		*new_3dpoint(int x, int y, int z, char *color);
 t_2dpoint		project_point(t_3dpoint *point3d);
+t_2dpoint		parallel_projection(t_3dpoint *point3d, t_environment *env,
+					double x_val, double y_val);
+t_2dpoint		isometric_projection(t_3dpoint *point3d, double x_val,
+					double y_val, double z_val);
 void			normalize_frames(t_environment *env);
 
 int				close_window(void *params);

@@ -25,4 +25,5 @@ void	initialize_camera(t_environment *env)
 	env->camera.z_rotation = 0.0;
 	env->camera.offset_x = 0;
 	env->camera.offset_y = 0;
+	env->camera.projection = PARALLEL;
 }

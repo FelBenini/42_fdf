@@ -109,7 +109,7 @@ int	loop_through_frames(t_environment *env)
 	gettimeofday(&current_time, NULL);
 	time_diff = (current_time.tv_sec - last_time.tv_sec)
 		* 1000000 + (current_time.tv_usec - last_time.tv_usec);
-	if (time_diff >= 41667)
+	if (time_diff >= 82667)
 	{
 		if (!env->frames)
 			return (0);

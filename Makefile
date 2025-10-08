@@ -49,6 +49,7 @@ SRCS_BONUS = ./src_bonus/main_bonus.c \
 	   ./src_bonus/parse_bonus.c \
 	   ./src_bonus/mlx_bonus.c \
 	   ./src_bonus/projection_bonus.c \
+	   ./src_bonus/projection2_bonus.c \
 	   ./src_bonus/initializers_bonus.c \
 	   ./src_bonus/initializers2_bonus.c \
 	   ./src_bonus/cleaners_bonus.c \

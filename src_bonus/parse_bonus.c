@@ -21,23 +21,23 @@ static t_3dpoint	***convert_list_to_matrix(t_list *head,
 	char			**content;
 
 	i = 0;
-	res = (t_3dpoint ***)ft_calloc(lst_size + 1, sizeof(t_3dpoint **));
-	if (!res)
-		return (NULL);
+	res = (t_3dpoint ***)malloc((lst_size + 1) * sizeof(t_3dpoint **));
 	while (head)
 	{
 		j = 0;
 		content = (char **)head->content;
 		while (content[j])
 			j++;
-		res[i] = (t_3dpoint **)ft_calloc(j + 1, sizeof(t_3dpoint *));
+		res[i] = (t_3dpoint **)malloc((j + 1) * sizeof(t_3dpoint *));
 		j = 0;
 		while (content[j++])
 			res[i][j - 1] = new_3dpoint(j - 1, i, ft_atoi(content[j - 1]),
 					ft_strnstr(content[j - 1], ",0x", 30));
+		res[i][j - 1] = 0;
 		head = head->next;
 		i++;
 	}
+	res[i] = 0;
 	return (res);
 }
 

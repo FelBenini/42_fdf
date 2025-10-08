@@ -60,7 +60,6 @@ static void	bend_axis(double x, double y, double *z, t_environment *env)
 
 t_2dpoint	project_point(t_3dpoint *point3d)
 {
-	t_2dpoint		res;
 	t_environment	*env;
 	double			x_val;
 	double			y_val;
@@ -74,14 +73,8 @@ t_2dpoint	project_point(t_3dpoint *point3d)
 	rotate_x_axis(&y_val, &z_val, env->camera.x_cos, env->camera.x_sin);
 	rotate_y_axis(&x_val, &z_val, env->camera.y_cos, env->camera.y_sin);
 	rotate_z_axis(&x_val, &y_val, env->camera.z_cos, env->camera.z_sin);
-	res.x = (int)(x_val * env->scale);
-	res.y = (int)(y_val * env->scale);
-	res.height = point3d->z;
-	if (point3d->has_color)
-		res.color = point3d->color;
+	if (env->camera.projection == ISOMETRIC)
+		return (isometric_projection(point3d, x_val, y_val, z_val));
 	else
-		res.color = get_color(res.height);
-	res.x += env->offset_x + env->camera.offset_x;
-	res.y += env->offset_y + env->camera.offset_y;
-	return (res);
+		return (parallel_projection(point3d, env, x_val, y_val));
 }

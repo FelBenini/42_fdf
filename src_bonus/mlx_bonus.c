@@ -55,6 +55,15 @@ static void	handle_numpad(int keycode, t_environment *env)
 		reset_perspective(env, 0, -1.57);
 }
 
+void	handle_projection_changes(int keycode, t_environment *env)
+{
+	ft_printf("%d\n", keycode);
+	if (keycode == 105)
+		env->camera.projection = ISOMETRIC;
+	if (keycode == 112)
+		env->camera.projection = PARALLEL;
+}
+
 int	handle_keymaps(int keycode, void *params)
 {
 	t_environment	*env;
@@ -76,6 +85,7 @@ int	handle_keymaps(int keycode, void *params)
 	if (keycode == 93)
 		env->z_factor += 0.01;
 	handle_numpad(keycode, env);
+	handle_projection_changes(keycode, env);
 	rotate(keycode, params);
 	return (0);
 }
