@@ -138,6 +138,8 @@ t_2dpoint		parallel_projection(t_3dpoint *point3d, t_environment *env,
 					double x_val, double y_val);
 t_2dpoint		isometric_projection(t_3dpoint *point3d, double x_val,
 					double y_val, double z_val);
+t_2dpoint		curvilinear_projection(t_3dpoint *point3d, double x_val,
+					double y_val, double z_val);
 void			normalize_frames(t_environment *env);
 
 int				close_window(void *params);

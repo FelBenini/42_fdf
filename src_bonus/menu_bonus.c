@@ -98,4 +98,6 @@ void	print_menu(t_environment *env)
 	put_str(812, 1672, 0xFFFFFF, "- HOLD SCROLL AND MOVE TO ROTATE MODEL");
 	put_str(832, 1672, 0xFFFFFF, "- HOLD RIGHT CLICK AND MOVE THE MOUSE TO");
 	put_str(848, 1672, 0xFFFFFF, "TO TRANSLATE THE MODEL");
+	put_str(888, 1672, 0xFFFFFF, "_____________PROJECTIONS____________");
+	put_str(918, 1672, 0xFFFFFF, "I. ISOMETRIC           P. PARALLEL");
 }

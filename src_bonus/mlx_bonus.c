@@ -57,11 +57,16 @@ static void	handle_numpad(int keycode, t_environment *env)
 
 void	handle_projection_changes(int keycode, t_environment *env)
 {
-	ft_printf("%d\n", keycode);
 	if (keycode == 105)
+	{
+		reset_perspective(env, 0, 0);
 		env->camera.projection = ISOMETRIC;
+	}
 	if (keycode == 112)
+	{
+		reset_perspective(env, 0, 0);
 		env->camera.projection = PARALLEL;
+	}
 }
 
 int	handle_keymaps(int keycode, void *params)
